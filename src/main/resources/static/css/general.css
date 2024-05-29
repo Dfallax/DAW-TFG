@@ -85,14 +85,7 @@ iframe{
         min-width: max-content;
         padding: 4px 0;
     }
-    .scroll{
-        width: 100%;
-        min-height: 400pt;
-        margin: 20px auto;
-        border: 1px solid #ccc;
-        padding: 20px;
-        overflow-y: auto; /* Hace que el contenido sea desplazable verticalmente */
-    }
+
 }
 
 /*Estilo cuando son dispositivos moviles*/
