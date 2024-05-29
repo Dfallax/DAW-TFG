@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{fragmentos/head::head(~{::title}, ~{::link})}">
+  <title>Carrito de Compras</title>
+  <link rel="stylesheet" th:href="@{/css/carrito.css}">
+</head>
+<body class="mx-3">
+<header th:replace="~{fragmentos/header::header}"></header>
+
+<main class="mx-auto">
+  <h2>Carrito de Compras</h2>
+  <div th:if="${carrito.articulos.size() == 0}">
+    <p>Tu carrito está vacío.</p>
+  </div>
+  <div th:if="${carrito.articulos.size() > 0}" class="row  my-3 mx-auto">
+    <!--Lista-->
+    <div id="contenedorArticulos">
+      <div th:replace="~{fragmentos/table-carrito::table-carrito}" ></div>
+    </div>
+    <div>
+      <div class="text-right"><strong>Total:</strong></div>
+      <div th:text="${#numbers.formatDecimal(carrito.getTotal(), 2, 2)}">0.00</div>
+    </div>
+    <!-- div para el modal -->
+    <div id="paraelmodal"></div>
+  </div>
+  <div class="text-right">
+    <a href="#" class="btn btn-success">Proceder al Pago</a>
+  </div>
+</main>
+
+<footer th:replace="~{fragmentos/footer::footer}"></footer>
+
+<th:block th:replace="~{fragmentos/js-final::jsfinal(~{::script})}">
+  <script th:src="@{/js/carrito.js}"></script>
+</th:block>
+</body>
+</html>

@@ -1,0 +1,23 @@
+usuario:
+  - id_usuario: 1
+    username: testuser
+    email: testuser@gmail.com
+    password: contraseña
+    telefono: 123456789
+    fecha_alta: 2023-01-01
+    id_perfil: 1
+  - id_usuario: 2
+    username: otheruser
+    email: otheruser@gmail.com
+    password: contraseña
+    telefono: 987654321
+    fecha_alta: 2023-01-01
+    id_perfil: 2
+  - id_usuario: 3
+    username: luis
+    email: luis@gmail.com
+    password: luis
+    telefono: 57312378
+    fecha_alta: 2023-01-01
+    id_perfil: 2
+

@@ -1,0 +1,5 @@
+perfil:
+  - id_perfil: 1
+    nombre: "ADMIN"
+  - id_perfil: 2
+    nombre: "USER"

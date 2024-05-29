@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{fragmentos/head::head(~{::title}, ~{::link})}">
+    <title>Blog</title>
+    <link rel="stylesheet" th:href="@{/css/pagina-blog.css}">
+</head>
+<body class="mx-3">
+<header th:replace="~{fragmentos/header::header}"></header>
+
+<main class="mx-auto">
+    <!--Migas de pan-->
+    <nav aria-label="breadcrumb" class="my-5 ms-3">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page"><a th:href="@{/index}">Inicio</a></li>
+            <li class="breadcrumb-item active" aria-current="page"><a th:href="@{/blog/pagina}">Blog</a></li>
+        </ol>
+    </nav>
+    <!--El título-->
+    <div>
+        <h2 id="tituloBlog">Blog</h2>
+    </div>
+    <!--Secciones Blog-->
+    <div class="row my-0 mx-auto">
+        <!--Opciones-->
+        <div class="col-12">
+            <div class="d-flex justify-content-center">
+                <form id="form-buscadorBlog" method="post" action="#">
+                    <input type="text" class="form-control" id="buscarPorTitulo" placeholder="Buscar por título" name="nombre"/>
+                </form>
+                <div id="iconoBuscadorBlog" class="nav-item m-1">
+                    <a class="nav-link" href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!--Las propias Secciones del blog-->
+        <div class="col-12 mt-4">
+            <div th:replace="~{fragmentos/seccion-blog :: seccion-blog}"></div>
+        </div>
+    </div>
+</main>
+<!-- Lista de nombre de productos -->
+<div th:replace="~{fragmentos/table-buscadorNav::table-buscadorNav}"></div>
+<footer th:replace="~{fragmentos/footer::footer}"></footer>
+<th:block th:replace="~{fragmentos/js-final::jsfinal(~{::script})}">
+    <script th:src="@{/js/pagina-blog.js}"></script>
+</th:block>
+</body>
+</html>

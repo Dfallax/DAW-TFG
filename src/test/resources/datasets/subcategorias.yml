@@ -1,0 +1,10 @@
+subcategoria:
+  - id_subcategoria: 1
+    nombre: "Navidad"
+    id_categoria: 1
+  - id_subcategoria: 2
+    nombre: "Dia de la Madre"
+    id_categoria: 1
+  - id_subcategoria: 3
+    nombre: "Bodas"
+    id_categoria: 1

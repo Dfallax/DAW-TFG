@@ -1,0 +1,41 @@
+#tituloTipoProducto{
+    text-align: center;
+    margin-top: 50pt ;
+    margin-bottom: 20pt;
+}
+.buttonSubtipo{
+    border-radius: 50px;
+    padding: 8px 10px;
+    background-color: white;
+    border: 2px solid black;
+    margin-right: 20px;
+}
+#opciones{
+    padding-bottom: 25px;
+    border-bottom: 1px solid lightgrey;
+}
+
+#opcionesIzquierda{
+    border-right: 2px solid lightgrey;
+    text-align: right;
+    padding: 10px 5%;
+}
+#opcionesDerecha{
+    padding: 10px 5%;
+}
+#enviarOrdenar{
+    border-radius: 50px;
+    padding: 8px 10px;
+    background-color: #006537;
+    color: #FFFFFF;
+    border: 2px solid black;
+    margin-right: 20px;
+}
+#enviarFiltrar{
+    border-radius: 50px;
+    padding: 8px 10px;
+    background-color: #006537;
+    color: #FFFFFF;
+    border: 2px solid black;
+    margin-right: 20px;
+}

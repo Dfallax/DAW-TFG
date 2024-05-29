@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{fragmentos/head::head(~{::title}, ~{::link})}">
+    <title>Ubicaciones</title>
+    <link rel="stylesheet" th:href="@{css/ubicaciones.css}">
+</head>
+<body class="mx-3">
+<header th:replace="~{fragmentos/header::header}"></header>
+
+<main class="mx-auto">
+    <!--Migas de pan-->
+    <nav aria-label="breadcrumb" class="my-5 ms-3">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page"><a th:href="@{/}">Inicio</a></li>
+            <li class="breadcrumb-item active" aria-current="page"><a th:href="@{/ubicaciones}">Ubicaciones</a></li>
+        </ol>
+    </nav>
+</main>
+<!-- Lista de nombre de productos -->
+<div th:replace="~{fragmentos/table-buscadorNav::table-buscadorNav}"></div>
+<footer th:replace="~{fragmentos/footer::footer}"></footer>
+<th:block th:replace="~{fragmentos/js-final::jsfinal(~{::script})}">
+    <script th:src="@{/js/ubicaciones.js}"></script>
+</th:block>
+</body>
+</html>

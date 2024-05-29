@@ -1,0 +1,5 @@
+categoria:
+  - id_categoria: 1
+    nombre: "cestas"
+  - id_categoria: 2
+    nombre: "ramos"

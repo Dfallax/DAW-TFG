@@ -1,0 +1,7 @@
+pedido:
+  - id_pedido: 1
+    estado: "PENDIENTE"
+    id_usuario: 1
+    id_direccion: 1
+    id_tarjeta: 1
+    fecha_pedido: "2023-01-01"

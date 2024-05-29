@@ -1,0 +1,26 @@
+.scroll {
+    width: 80%;
+    min-height: 400pt;
+    margin: 20px auto;
+    border: 1px solid #ccc;
+    padding: 20px;
+    max-height: 300px; /* Altura máxima del contenedor */
+    overflow-y: auto; /* Hace que el contenido sea desplazable verticalmente */
+}
+
+.scroll-content {
+    /* Asegura que el contenido no se desborde fuera del contenedor */
+    overflow: hidden;
+}
+
+/*Estilos cuando el ancho es inferior a 992px*/
+@media only screen and (max-width: 992px) {
+    .scroll{
+        width: 100%;
+        min-height: 400pt;
+        margin: 20px auto;
+        border: 1px solid #ccc;
+        padding: 20px;
+        overflow-y: auto; /* Hace que el contenido sea desplazable verticalmente */
+    }
+}

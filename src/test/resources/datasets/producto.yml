@@ -1,0 +1,8 @@
+producto:
+  - id_producto: 1
+    nombre: "Producto de prueba"
+    precio: 99.99
+    descripcion: "Descripción del producto de prueba."
+    foto: "http://ejemplo.com/imagen.jpg"
+    media_valoraciones: 0
+

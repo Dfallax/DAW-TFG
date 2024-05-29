@@ -1,0 +1,7 @@
+seccion_blog:
+  - id_seccion_blog: 1
+    titulo: "Recomendaciones de como cuidar las orquideas"
+    descripcion: "Decripción del video recomendaciones de como cuidar las orquideas"
+    video: /upload-dir/videos/video1.mp4
+    fecha_subida: 2023-05-23
+    id_usuario: 3

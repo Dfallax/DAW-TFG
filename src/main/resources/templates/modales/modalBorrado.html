@@ -1,0 +1,18 @@
+<!--  Modal para el borrado -->
+<div class="modal fade" id="modalBorrado" tabindex="-1" th:fragment="modalBorrado">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" th:text="${delete_title}"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body">
+                <p th:text="${delete_message}">¿Confirma el borrado de ....?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <a href="#" th:href="@{${delete_url}}" class="btn btn-primary">Aceptar</a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+h3{
+    text-align: center;
+}
+.card-producto{
+    width: 400px;
+    float: left;
+}
+#imagen-producto{
+    width: 100%;
+}
+#scroll {
+    overflow-x: auto;
+    white-space: nowrap;
+    width: 100%;
+}
+
+#scroll-content {
+    display: inline-block;
+}
+.item-producto {
+    display: inline-block;
+    width: 260px;
+    height: 380px;
+    margin-right: 20px;
+}

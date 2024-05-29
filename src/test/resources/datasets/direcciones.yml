@@ -1,0 +1,19 @@
+direccion:
+  - id_direccion: 1
+    calle: "Calle 123"
+    numero: 456
+    piso: 2
+    puerta: "A"
+    ciudad: "Ciudad Ejemplo 1"
+  - id_direccion: 2
+    calle: "Avenida Principal"
+    numero: 789
+    piso: 1
+    puerta: "B"
+    ciudad: "Ciudad Ejemplo 2"
+  - id_direccion: 3
+    calle: "Carrera 45"
+    numero: 321
+    piso: 3
+    puerta: "C"
+    ciudad: "Ciudad Ejemplo 3"

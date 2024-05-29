@@ -1,0 +1,31 @@
+
+<span  th:fragment="table-carrito" th:each="articulo : ${carrito.articulos}" class="card span-articulo">
+    <div class="card-header" >
+        <h3 class="productoNombre" th:text="${articulo.producto.nombre}"></h3>
+    </div>
+    <div class="card-img">
+            <img th:src="${articulo.producto.foto}" alt="Foto producto" class="imagen-producto">
+    </div>
+    <div class="card-body">
+        <div>
+            <div>Precio por unidad:</div>
+            <div th:text="${#numbers.formatDecimal(articulo.precioUnidad , 2, 2)}"></div>
+        </div>
+        <div>
+            <div>Cantidad:</div>
+            <div>
+                <input type="number" class="cantidad" th:value="${articulo.cantidad}" min="1" th:attr="data-articulo-id=${articulo.id.idPedido} + '-' + ${articulo.id.idProducto}" onchange="cambioInput(this)">
+            </div>
+        </div>
+        <div>
+            <div>Total:</div>
+            <div>
+                <div class="precioArticulo" th:text="${#numbers.formatDecimal(articulo.precioUnidad * articulo.cantidad, 2, 2)}">0.00</div>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+        <button class="btn btn-danger botonEliminarArticulo" th:attr="data-articulo-id=${articulo.id.idPedido} + '-' + ${articulo.id.idProducto}")>Eliminar</button>
+    </div>
+</span>
+

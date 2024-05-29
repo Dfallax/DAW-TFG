@@ -1,0 +1,30 @@
+<span th:fragment="span-producto" th:each="producto :${listaProducto}" class="span-producto card mt-3 ">
+    <div class="card-img  position-relative mt-3">
+        <a th:href="@{/producto/detalle/{nombre}(nombre=${producto.nombre})}">
+            <img th:src="${producto.foto}" alt="Foto producto" class="imagen-producto">
+            <div class="valoracionMedia">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" fill="yellow"/>
+                </svg>
+                <span class="ms-2" th:text="${producto.mediaValoraciones}">0.00</span>
+            </div>
+        </a>
+    </div>
+    <div class="card-body container">
+        <div class="row">
+            <h5 class="col-6 text-start" th:text="${producto.nombre}">Nombre Producto</h5>
+            <h5 class="col-6 text-end">
+                <span class="precio" th:text="${producto.precio}"></span>
+                <span>€</span>
+            </h5>
+        </div>
+        <div>
+            <button class="btn btn-light border border-black">Comprar</button>
+            <button class="btn btn-warning border border-black">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart3" viewBox="0 0 16 16">
+                    <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l.84 4.479 9.144-.459L13.89 4zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+</span>

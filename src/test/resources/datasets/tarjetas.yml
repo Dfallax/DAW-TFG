@@ -1,0 +1,13 @@
+tarjeta:
+  - id_tarjeta: 1
+    num_tarjeta: "1234567890123456"
+    cv: "123"
+    fecha_caducidad: "2025-12-01"
+  - id_tarjeta: 2
+    num_tarjeta: "9876543210987654"
+    cv: "456"
+    fecha_caducidad: "2026-06-01"
+  - id_tarjeta: 3
+    num_tarjeta: "1111222233334444"
+    cv: "789"
+    fecha_caducidad: "2024-03-01"

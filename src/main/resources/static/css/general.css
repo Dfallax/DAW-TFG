@@ -1,0 +1,104 @@
+h1, h2 {
+    font-family: "Sedan SC", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+footer{
+    width: 100%;
+}
+
+iframe{
+    width: auto
+}
+.link-buscadorNav{
+    text-decoration: none;
+    color: black;
+}
+.span-producto{
+    width: 31%;
+    float: left;
+    margin: 1%;
+}
+.imagen-producto{
+    width: 100%;
+}
+.valoracionMedia{
+    display: flex;
+    align-items: center;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Color de fondo del overlay */
+    color: white; /* Color del texto del overlay */
+    padding: 10px;
+}
+.dropdown-menu {
+    min-width: auto;
+    padding: 4px 0;
+}
+
+#input-buscador, #listaBuscadorNav, #titulo-pequeño{
+    display: none;
+}
+#table-buscadorNav{
+    height: 100%;
+}
+#form-buscadorNav{
+    width: 90%;
+}
+#icono-cerrar-buscador{
+    width: 10%;
+}
+
+#titulo-grande{
+    display: block;
+}
+.logo-zerif{
+    height: 100%;
+    width: auto;
+    max-width: 350px;
+}
+
+/*Estilos cuando el ancho es inferior a 992px*/
+@media only screen and (max-width: 993px) {
+    #titulo-grande{
+        display: none;
+    }
+    #titulo-pequeño{
+        display: block;
+        margin-left: 0;
+        text-decoration: none;
+        color: black;
+    }
+    .logo-zerif{
+        height: auto;
+        width: auto;
+        max-width: 125px;
+    }
+
+    .span-producto {
+        width: 48%;
+    }
+
+    .dropdown-menu {
+        min-width: max-content;
+        padding: 4px 0;
+    }
+    .scroll{
+        width: 100%;
+        min-height: 400pt;
+        margin: 20px auto;
+        border: 1px solid #ccc;
+        padding: 20px;
+        overflow-y: auto; /* Hace que el contenido sea desplazable verticalmente */
+    }
+}
+
+/*Estilo cuando son dispositivos moviles*/
+@media only screen and (max-width: 412px) {
+
+    .span-producto {
+        width: 100%;
+    }
+}

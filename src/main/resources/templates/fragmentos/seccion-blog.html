@@ -1,0 +1,24 @@
+<div id="seccion-blog" th:fragment="seccion-blog">
+    <div class="scroll">
+        <div class="scroll-content">
+            <div class="accordion accordion-flush" id="accordionExample">
+                <div th:each="seccion : ${listaSeccionBlog}" class="accordion-item">
+                    <h2 class="accordion-header" th:id="'header' + ${seccion.id}">
+                        <button th:text="${seccion.titulo}" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" th:data-bs-target="'#collapse' + ${seccion.id}" aria-expanded="false" th:aria-controls="'collapse' + ${seccion.id}">
+                            Accordion Item #1
+                        </button>
+                    </h2>
+                    <div th:id="'collapse' + ${seccion.id}" class="accordion-collapse collapse" th:aria-labelledby="'header' + ${seccion.id}" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <div th:if="${seccion.video != null}">
+                                <iframe th:src="${seccion.video}" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
+                            <strong>Descripción</strong>
+                            <p th:text="${seccion.descripcion}"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

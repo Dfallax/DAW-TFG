@@ -1,0 +1,9 @@
+<table class="table table-striped" id="table-buscadorNav" th:fragment="table-buscadorNav">
+    <tbody>
+    <tr th:each="producto : ${listaProductos}">
+        <td>
+            <a class="link-buscadorNav" th:href="@{/producto/detalle/{nombre}(nombre=${producto.nombre})}" th:text="${producto.nombre}"></a>
+        </td>
+    </tr>
+    </tbody>
+</table>

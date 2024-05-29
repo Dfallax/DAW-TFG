@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{fragmentos/head::head(~{::title}, ~{::link})}">
+    <title>Inicio</title>
+    <link rel="stylesheet" th:href="@{css/index.css}">
+</head>
+<body class="mx-3">
+<header th:replace="~{fragmentos/header::header}"></header>
+
+<main class="mx-auto">
+    <!--Migas de pan-->
+    <nav aria-label="breadcrumb" class="my-5 ms-3">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page"><a th:href="@{/}">Inicio</a></li>
+        </ol>
+    </nav>
+    <!--Carrusel de noticias-->
+    <section class="row my-3 mx-auto">
+        <div class="container">
+            <div class="row">
+                <div id="carouselExampleIndicators" class="carousel slide col-12">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Diapositiva 1"></button>
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Diapositiva 2"></button>
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Diapositiva 3"></button>
+                    </div>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <svg class="bd-placeholder-img bd-placeholder-img-lg  w-100" width="800" height="400" role="img" aria-label="Marcador de posición: Primera diapositiva" focusable="false" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+                                <title>Marcador de posición</title>
+                                <rect width="100%" height="100%" fill="#777"></rect><text x="50%" y="50%" fill="#555" dy=".3em">Primera diapositiva</text>
+                            </svg>
+                        </div>
+                        <div class="carousel-item">
+                            <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="400" role="img" aria-label="Marcador de posición: Segunda diapositiva" focusable="false" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+                                <title>Marcador de posición</title>
+                                <rect width="100%" height="100%" fill="#666"></rect><text x="50%" y="50%" fill="#444" dy=".3em">Segunda diapositiva</text>
+                            </svg>
+                        </div>
+                        <div class="carousel-item">
+                            <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="400" role="img" aria-label="Marcador de posición: Tercera diapositiva" focusable="false" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+                                <title>Marcador de posición</title>
+                                <rect width="100%" height="100%" fill="#555"></rect><text x="50%" y="50%" fill="#333" dy=".3em">Tercera diapositiva</text>
+                            </svg>
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Anterior</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Siguiente</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--Area de productos-->
+    <section class="row  my-3 mx-auto">
+        <div th:replace="~{fragmentos/span-producto::span-producto}">
+        </div>
+    </section>
+    <!--Twitter-->
+    <section class="row my-0 mx-auto">
+        <div class="scroll">
+            <div class="scroll-content">
+                <a class="twitter-timeline" href="https://twitter.com/Interflora?ref_src=twsrc%5Etfw">Tweets by Interflora</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            </div>
+        </div>
+    </section>
+</main>
+<!-- Lista de nombre de productos -->
+<div th:replace="~{fragmentos/table-buscadorNav::table-buscadorNav}"></div>
+<footer th:replace="~{fragmentos/footer::footer}"></footer>
+<th:block th:replace="~{fragmentos/js-final::jsfinal(~{::script})}">
+    <script th:src="@{/js/index.js}"></script>
+</th:block>
+</body>
+</html>

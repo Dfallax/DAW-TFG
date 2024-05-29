@@ -1,0 +1,7 @@
+preferencias:
+  - id_preferencias: 1
+    idioma: "es_ES"
+    id_usuario: 1
+  - id_preferencias: 2
+    idioma: "en_EN"
+    id_usuario: 2

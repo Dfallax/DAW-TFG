@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="~{fragmentos/head::head(~{::title}, ~{})}">
+  <title>Registro</title>
+</head>
+
+<body>
+
+<main class="container mt-5">
+  <div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2">
+    <div class="card">
+      <div class="card-header">Crear cuenta de usuario</div>
+
+      <div class="card-body pt-3">
+        <form sec:authorize="!isAuthenticated()"
+              th:action="@{/usuario/signup}" method="post"
+              th:object="${usuarioSignupDto}">
+
+          <div class="input-group mb-3">
+            <span class="input-group-text"><i class="fa fa-user"></i></span>
+            <input id="username" type="text" class="form-control" th:field="*{username}"
+                   placeholder="Introduzca username">
+            <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"
+                  class="help-block" id="username-error">Errores</span>
+          </div>
+
+          <div class="input-group mb-3">
+            <span class="input-group-text"><i class="fa fa-envelope"></i></span>
+            <input id="email" type="email" class="form-control" th:field="*{email}"
+                   placeholder="Introduzca email">
+          </div>
+
+          <div class="input-group mb-3">
+            <span class="input-group-text"><i class="fa fa-lock"></i></span>
+            <input id="password" type="password" class="form-control" th:field="*{password}"
+                   placeholder="Introduzca contraseña">
+          </div>
+
+          <div class="mb-3">
+
+            <div class="form-check form-check-inline" th:each="perfil : ${listaPerfiles}">
+              <input  type="checkbox" class="form-check-input" th:field="*{perfiles}"
+                    th:value="${perfil.id}"
+                    th:text="${perfil.nombre}">
+              <!--
+              <label th:for="${perfil.nombre}" th:text="${perfil.nombre}">Perfil</label>
+              -->
+            </div>
+          </div>
+
+
+          <!-- Button -->
+          <div class="col-sm-12">
+            <button id="btn-login" type="submit" class="btn btn-success">Crear usuario</button>
+          </div>
+
+        </form>
+      </div>
+      <div class="card-footer text-center">
+        <p class="text-center mt-3">¿Ya tienes cuenta?
+          <a class="text-primary" href="#" th:href="@{/usuario/login}">Iniciar sesión</a>
+        </p>
+        <p sec:authorize="isAuthenticated()">Usted ya ha iniciado una sesión</p>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+</body>
+</html>

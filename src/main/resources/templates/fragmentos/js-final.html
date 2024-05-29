@@ -1,0 +1,8 @@
+<!-- Scripts javascript del final -->
+<th:block th:fragment="jsfinal(scripts)">
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script th:src="@{/js/general.js}"></script>
+    <!-- Scripts adicionales -->
+    <th:block th:replace="${scripts}" />
+</th:block>

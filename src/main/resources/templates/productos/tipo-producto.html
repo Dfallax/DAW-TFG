@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{fragmentos/head::head(~{::title}, ~{::link})}">
+    <title th:text="${tipo}"></title>
+    <link rel="stylesheet" th:href="@{/css/tipo-producto.css}">
+</head>
+<body class="mx-3">
+<header th:replace="~{fragmentos/header::header}"></header>
+<main class="mx-auto">
+    <!--Migas de pan-->
+    <div>
+        <nav aria-label="breadcrumb" class="my-5 ms-3">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item active" aria-current="page"><a th:href="@{/}">Inicio</a></li>
+                <li class="breadcrumb-item active" aria-current="page"><a id="breadcrumb-tipo" th:text="${tipo}" th:href="@{/producto/tipo/{tipo1}(tipo1=${tipo})}">Detalle Producto</a></li>
+            </ol>
+        </nav>
+    </div>
+    <!--El tipo-->
+    <div>
+        <h2 id="tituloTipoProducto" th:text="${tipo}"></h2>
+    </div>
+    <!--Opciones-->
+    <div>
+        <!--Subtipos-->
+        <div th:unless="${listaSubtipos.size()==0}" class="mb-5">
+            <div>
+                <button class="buttonSubtipo" th:each="subtipo : ${listaSubtipos}" th:text="${subtipo.nombre}">Todos los Ramos</button>
+            </div>
+        </div>
+        <!--Opciones-->
+        <div id="opciones" class="d-flex justify-content-center align-items-center my-3">
+            <div id="opcionesIzquierda" class="w-50">
+                <a id="aOpcionesIzquierda">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-sliders" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M11.5 2a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3M9.05 3a2.5 2.5 0 0 1 4.9 0H16v1h-2.05a2.5 2.5 0 0 1-4.9 0H0V3zM4.5 7a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3M2.05 8a2.5 2.5 0 0 1 4.9 0H16v1H6.95a2.5 2.5 0 0 1-4.9 0H0V8zm9.45 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3m-2.45 1a2.5 2.5 0 0 1 4.9 0H16v1h-2.05a2.5 2.5 0 0 1-4.9 0H0v-1z"/>
+                    </svg>
+                    <span class="me-2">Ordena por</span>
+                </a>
+            </div>
+            <div id="opcionesDerecha" class="w-50">
+                <a id="aOpcionesDerecha">
+                    <span class="ms-2">Filtro</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-filter" viewBox="0 0 16 16">
+                        <path d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+        <!--Modales-->
+        <div id="paraModalOpcionesOrdenar"></div>
+        <div id="paraModalOpcionesFiltrar"></div>
+    </div>
+    <!--Productos-->
+    <div id="contenedorProductos" class="row  my-3 mx-auto">
+        <div th:replace="~{fragmentos/span-producto::span-producto}"></div>
+    </div>
+</main>
+<!-- Lista de nombre de productos -->
+<div th:replace="~{fragmentos/table-buscadorNav::table-buscadorNav}"></div>
+
+<footer th:replace="~{fragmentos/footer::footer}"></footer>
+<th:block th:replace="~{fragmentos/js-final::jsfinal(~{::script})}">
+    <script th:src="@{/js/tipo-producto.js}"></script>
+</th:block>
+</body>
+</html>

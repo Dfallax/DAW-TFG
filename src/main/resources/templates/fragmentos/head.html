@@ -1,0 +1,25 @@
+<header th:fragment="head(titulo,enlaces)">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+
+    <title th:replace="${titulo}">Título</title>
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <!-- Font awesome icons -->
+    <link th:href="@{/webjars/font-awesome/css/all.css}" rel="stylesheet" type="text/css"/>
+    <!-- noUiSlider CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.3/nouislider.min.css">
+    <!--General para todos-->
+    <link th:href="@{/css/general.css}" rel="stylesheet" type="text/css"/>
+    <!--Google Font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sedan+SC&display=swap" rel="stylesheet">
+    <!-- noUiSlider JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.3/nouislider.min.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Otras hojas de estilos-->
+    <link th:replace="${enlaces}"/>
+</header>
