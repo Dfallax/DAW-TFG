@@ -1,5 +1,5 @@
 
-<span  th:fragment="table-carrito" th:each="articulo : ${carrito.articulos}" class="card span-articulo">
+<div  th:fragment="span-carrito" th:each="articulo : ${carrito.articulos}" class="card span-articulo mt-3">
     <div class="card-header" >
         <h3 class="productoNombre" th:text="${articulo.producto.nombre}"></h3>
     </div>
@@ -27,5 +27,5 @@
     <div class="card-footer">
         <button class="btn btn-danger botonEliminarArticulo" th:attr="data-articulo-id=${articulo.id.idPedido} + '-' + ${articulo.id.idProducto}")>Eliminar</button>
     </div>
-</span>
+</div>
 

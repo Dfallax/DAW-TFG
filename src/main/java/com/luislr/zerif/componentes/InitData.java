@@ -317,7 +317,7 @@ public class InitData {
                     pedidoService.save(pedido); // Guardar el pedido primero para obtener el ID
 
                     // Agregar artículos al pedido después de guardar el pedido para obtener su ID
-                    for (int j = 0; j < 3; j++) {
+                    for (int j = 0; j < 5; j++) {
                         Producto producto = productos.get(random.nextInt(productos.size()));
                         ArticuloPedidoPK id = new ArticuloPedidoPK(pedido.getId(), producto.getId());
                         ArticuloPedido articulo = ArticuloPedido.builder()

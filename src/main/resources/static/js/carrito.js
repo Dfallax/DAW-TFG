@@ -1,7 +1,5 @@
 $('.botonEliminarArticulo').click(function (event) {
-    event.preventDefault(); // para evitar que se envíe el formulario
-    //var id = $(this).closest('tr').find('td').first().text();
-    const nombre = $(event.target).closest('tr').find('.productoNombre').text();
+    const nombre = $(event.target).closest('.span-articulo').find('.productoNombre').text();
     $.ajax({
         type: "get",
         url: "/pedido/articulo/delete/show/" + nombre,
@@ -14,8 +12,9 @@ $('.botonEliminarArticulo').click(function (event) {
         }
     });
 });
+
 // Evento para manejar cambios en los inputs
-$('input.cantidad').on('input change', function () {
+$(document).on('input', '.cantidad', function() {
     cambioInput(this);
 });
 function cambioInput(input) {

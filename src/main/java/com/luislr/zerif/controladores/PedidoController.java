@@ -100,6 +100,6 @@ public class PedidoController {
         }
 
         model.addAttribute("carrito",pedidoService.obtenerCarrito(username));
-        return "fragmentos/table-carrito::table-carrito";
+        return "fragmentos/span-carrito::span-carrito";
     }
 }
