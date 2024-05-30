@@ -1,5 +1,5 @@
 
-<div  th:fragment="span-carrito" th:each="articulo : ${carrito.articulos}" class="card span-articulo mt-3">
+<div  th:fragment="span-carrito" th:each="articulo : ${carrito.articulos}" class="card span-articulo mb-4">
     <div class="card-header" >
         <h3 class="productoNombre" th:text="${articulo.producto.nombre}"></h3>
     </div>

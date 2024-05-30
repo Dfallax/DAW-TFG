@@ -42,11 +42,22 @@ function cambioInput(input) {
             url: urlDestino,
             success: function (response) {
                 $("#contenedorArticulos").html(response);
+                // Actualizamos el precio del pedido
+                const precios = document.querySelectorAll('.precioArticulo');
+                let precioAcumulado =0;
+                precios.forEach(precio => {
+                    const numero = parseFloat(precio.textContent);
+                    precioAcumulado+=numero;
+                });
+                const precioPedido = parseFloat(precioAcumulado.toFixed(2));
+                const elementoPrecioPedido = document.getElementById('precioPedido');
+                elementoPrecioPedido.textContent=precioPedido+"€";
             },
             error: function () {
                 alert("Error al cargar los productos.");
             }
         });
+
     } else {
         console.error("El valor del input no es un número válido");
     }

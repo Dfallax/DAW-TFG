@@ -6,6 +6,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.List;
@@ -51,9 +52,12 @@ public class Pedido implements Serializable {
     }
 
     public BigDecimal getTotal(){
-        if(articulos == null || articulos.isEmpty()) return BigDecimal.ZERO;
+        if (articulos == null || articulos.isEmpty()) return BigDecimal.ZERO;
 
-        return articulos.stream().map(ArticuloPedido::getSubtotal) //  articulo -> articulo.getSubtotal()
-                .reduce(BigDecimal.ZERO, (current, total) -> total.add(current) );
+        BigDecimal total = articulos.stream()
+                .map(ArticuloPedido::getSubtotal)//  articulo -> articulo.getSubtotal()
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+        return total.setScale(2, RoundingMode.HALF_UP);
     }
 }

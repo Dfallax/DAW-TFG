@@ -7,9 +7,13 @@
 .cantidad{
     width: 50px;
 }
-
+#tituloCarrito{
+    text-align: center;
+    margin-top: 50pt ;
+    margin-bottom: 20pt;
+}
 #scroll {
-    height: 490pt;
+    height: 450pt;
     margin: 20px auto;
     border: 1px solid #ccc;
     padding: 20px;
@@ -17,7 +21,7 @@
 }
 
 #scroll-content {
-    margin: 0 0 20px; /* Añade margen entre los párrafos */
+    margin: 0 0 ;
 }
 
 @media only screen and (max-width: 993px) {

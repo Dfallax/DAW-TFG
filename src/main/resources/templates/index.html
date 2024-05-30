@@ -73,7 +73,9 @@
 </main>
 <!-- Lista de nombre de productos -->
 <div th:replace="~{fragmentos/table-buscadorNav::table-buscadorNav}"></div>
+<!--Pie de pagina-->
 <footer th:replace="~{fragmentos/footer::footer}"></footer>
+<!--Script-->
 <th:block th:replace="~{fragmentos/js-final::jsfinal(~{::script})}">
     <script th:src="@{/js/index.js}"></script>
 </th:block>

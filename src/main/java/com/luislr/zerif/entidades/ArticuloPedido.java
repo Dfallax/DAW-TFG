@@ -5,6 +5,7 @@ import lombok.*;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 @Builder
 @NoArgsConstructor
@@ -36,6 +37,7 @@ public class ArticuloPedido implements Serializable {
 
     public BigDecimal getSubtotal(){
         if(precioUnidad == null) return BigDecimal.ZERO;
-        return precioUnidad.multiply(BigDecimal.valueOf(cantidad));
+        BigDecimal total= precioUnidad.multiply(BigDecimal.valueOf(cantidad));
+        return total.setScale(2, RoundingMode.HALF_UP);
     }
 }
