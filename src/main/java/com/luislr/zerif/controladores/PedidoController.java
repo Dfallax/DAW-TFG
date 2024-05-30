@@ -102,4 +102,12 @@ public class PedidoController {
         model.addAttribute("carrito",pedidoService.obtenerCarrito(username));
         return "fragmentos/span-carrito::span-carrito";
     }
+
+    @GetMapping("/carrito/compra")
+    public String procesoCompra(Model model){
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        Pedido pedido = pedidoService.obtenerCarrito(username);
+        model.addAttribute("carrito", pedido);
+        return "pedido/proceso-compra";
+    }
 }
