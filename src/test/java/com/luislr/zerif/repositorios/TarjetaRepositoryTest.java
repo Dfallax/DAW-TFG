@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
-import java.time.LocalDate;
+import java.time.YearMonth;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -45,7 +45,7 @@ public class TarjetaRepositoryTest {
         Tarjeta tarjeta = Tarjeta.builder()
                 .numTarjeta("12338363662")
                 .cv("023")
-                .fechCaducidad(LocalDate.now())
+                .fechCaducidad(YearMonth.now())
                 .pedido(pedido)
                 .build();
         Tarjeta savedTarjeta = tarjetaRepository.save(tarjeta);
@@ -58,10 +58,10 @@ public class TarjetaRepositoryTest {
             , cleanBefore = true, cleanAfter = true)
     public void shouldUpdateTarjeta(){
         Tarjeta tarjeta = tarjetaRepository.findById(1L).orElseThrow();
-        tarjeta.setFechCaducidad(LocalDate.now().minusYears(1));
+        tarjeta.setFechCaducidad(YearMonth.now().minusYears(1));
 
         Tarjeta updateTarjete = tarjetaRepository.save(tarjeta);
-        assertThat(updateTarjete.getFechCaducidad()).isEqualTo(LocalDate.now().minusYears(1));
+        assertThat(updateTarjete.getFechCaducidad()).isEqualTo(YearMonth.now().minusYears(1));
     }
     @Test
     @DataSet(value = {"datasets/tarjetas.yml", "datasets/pedidos.yml",

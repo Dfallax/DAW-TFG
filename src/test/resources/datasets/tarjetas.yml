@@ -2,5 +2,5 @@ tarjeta:
   - id_pedido: 1
     num_tarjeta: "1234567890123456"
     cv: "123"
-    fecha_caducidad: "2025-12-01"
+    fecha_caducidad: "05/2025"
 

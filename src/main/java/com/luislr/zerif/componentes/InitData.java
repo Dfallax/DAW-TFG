@@ -7,15 +7,17 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.time.YearMonth;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -40,7 +42,7 @@ public class InitData {
 
     @Transactional
     @EventListener
-    public void onApplicationEvent(ApplicationReadyEvent event) {
+    public void onApplicationEvent() {
         initStorage();
         initUsuarios();
         initSeccionBlog();
@@ -130,15 +132,16 @@ public class InitData {
         Producto p8 = Producto.builder()
                 .nombre("Amazonas")
                 .precio(250)
-                .descripcion("Una gran cesta con todo tipo de variedad de frutas, piñas, uvas, mango, plátanos, papaya, granadilla, bananitos, ciruelas, fresas, frambuesas, moras, melón, chirimoya, aguacate, physalis?, y tableta de chocolate orgánico. Arreglo de flores exóticas y verdes.\n" +
-                        "\n" +
-                        "Las frutas se reciben diariamente y están seleccionadas una a una por personal cualificado.\n" +
-                        "\n" +
-                        "La bandeja es de metal, cuadrada y perfecta para utilizarla muchas veces.\n" +
-                        "\n" +
-                        "Si este regalo te parece que puede ser aún más espectacular, dínoslo y te preparamos una cesta más grande, a tu medida.\n" +
-                        "\n" +
-                        "Puedes darle más valor a tu regalo complementando la cesta con una botella de vino o champán u otros complementos.")
+                .descripcion("""
+                        Una gran cesta con todo tipo de variedad de frutas, piñas, uvas, mango, plátanos, papaya, granadilla, bananitos, ciruelas, fresas, frambuesas, moras, melón, chirimoya, aguacate, physalis?, y tableta de chocolate orgánico. Arreglo de flores exóticas y verdes.
+
+                        Las frutas se reciben diariamente y están seleccionadas una a una por personal cualificado.
+
+                        La bandeja es de metal, cuadrada y perfecta para utilizarla muchas veces.
+
+                        Si este regalo te parece que puede ser aún más espectacular, dínoslo y te preparamos una cesta más grande, a tu medida.
+
+                        Puedes darle más valor a tu regalo complementando la cesta con una botella de vino o champán u otros complementos.""")
                 .foto("http://localhost:9000/files/cesta4.jpg")
                 .categoria(categoriaService.findByNombre("cestas").orElseThrow())
                 .subcategoria(subcategoriaService.findByNombre("Cestas de Bodas").orElse(null))
@@ -216,12 +219,13 @@ public class InitData {
         Producto evento1 = Producto.builder()
                 .nombre("Decoración de Boda Elegante")
                 .precio(1500)
-                .descripcion("Transforma tu boda en un evento de ensueño con nuestra decoración elegante. Este servicio incluye:\n" +
-                        "- Arreglos florales personalizados.\n" +
-                        "- Centros de mesa con diseño exclusivo.\n" +
-                        "- Iluminación ambiental para crear una atmósfera romántica.\n" +
-                        "- Telones y cortinas de alta calidad.\n" +
-                        "Nuestro equipo de expertos se encargará de cada detalle para que tú solo disfrutes de tu día especial.")
+                .descripcion("""
+                        Transforma tu boda en un evento de ensueño con nuestra decoración elegante. Este servicio incluye:
+                        - Arreglos florales personalizados.
+                        - Centros de mesa con diseño exclusivo.
+                        - Iluminación ambiental para crear una atmósfera romántica.
+                        - Telones y cortinas de alta calidad.
+                        Nuestro equipo de expertos se encargará de cada detalle para que tú solo disfrutes de tu día especial.""")
                 .foto("http://localhost:9000/files/decoracion_boda_elegante.webp")
                 .categoria(evento)
                 .build();
@@ -230,12 +234,13 @@ public class InitData {
         Producto evento2 = Producto.builder()
                 .nombre("Fiesta Temática Infantil")
                 .precio(800)
-                .descripcion("Haz realidad los sueños de los más pequeños con nuestra fiesta temática infantil. Este servicio incluye:\n" +
-                        "- Decoración temática basada en el personaje o tema favorito del niño.\n" +
-                        "- Arcos de globos y pancartas personalizadas.\n" +
-                        "- Mesas de dulces y postres decoradas con el tema elegido.\n" +
-                        "- Animación y juegos organizados por nuestro equipo.\n" +
-                        "Hacemos que cada celebración sea única y memorable.")
+                .descripcion("""
+                        Haz realidad los sueños de los más pequeños con nuestra fiesta temática infantil. Este servicio incluye:
+                        - Decoración temática basada en el personaje o tema favorito del niño.
+                        - Arcos de globos y pancartas personalizadas.
+                        - Mesas de dulces y postres decoradas con el tema elegido.
+                        - Animación y juegos organizados por nuestro equipo.
+                        Hacemos que cada celebración sea única y memorable.""")
                 .foto("http://localhost:9000/files/fiesta_tematica_infantil.webp")
                 .categoria(evento)
                 .build();
@@ -308,7 +313,7 @@ public class InitData {
                     Tarjeta tarjeta = Tarjeta.builder()
                             .numTarjeta("4111111111111111")
                             .cv("123")
-                            .fechCaducidad(LocalDate.now().plusYears(3))
+                            .fechCaducidad(YearMonth.now().plusYears(3))
                             .pedido(pedido)
                             .build();
                     tarjetaService.save(tarjeta);
