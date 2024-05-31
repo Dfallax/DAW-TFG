@@ -12,5 +12,4 @@ public interface PedidoRepository extends JpaRepository<Pedido, Long> {
     Optional<Pedido> findByUsuarioAndEstado(Usuario usuario, Pedido.EstadoPedido estado);
     Optional<Pedido> findByEstado(Pedido.EstadoPedido estado);
 
-
 }

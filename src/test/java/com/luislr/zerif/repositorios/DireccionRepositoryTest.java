@@ -1,10 +1,9 @@
-package com.luislr.zerif.reposotirios;
+package com.luislr.zerif.repositorios;
 
 import com.github.database.rider.core.api.dataset.DataSet;
 import com.github.database.rider.spring.api.DBRider;
-import com.luislr.zerif.entidades.Categoria;
 import com.luislr.zerif.entidades.Direccion;
-import com.luislr.zerif.repositorios.DireccionRepository;
+import com.luislr.zerif.entidades.Pedido;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,26 +22,40 @@ public class DireccionRepositoryTest {
 
     @Autowired
     private DireccionRepository direccionRepository;
+    @Autowired
+    private PedidoRepository pedidoRepository;
 
     @Test
-    @DataSet(value = "datasets/direcciones.yml", cleanBefore = true, cleanAfter = true)
+    @DataSet(value = {"datasets/direcciones.yml", "datasets/pedidos.yml",
+            "datasets/usuarios.yml", "datasets/perfiles.yml",
+    }
+            , cleanBefore = true, cleanAfter = true)
     public void shouldFindDireccionById(){
         Optional<Direccion> direccionOptional = direccionRepository.findById(1L);
         assertThat(direccionOptional).isPresent();
     }
     @Test
+    @DataSet(value = {"datasets/pedidos.yml",
+            "datasets/usuarios.yml", "datasets/perfiles.yml",
+    }
+            , cleanBefore = true, cleanAfter = true)
     public void shouldCreateDireccion(){
+        Pedido pedido = pedidoRepository.getReferenceById(1L);
         Direccion direccion = Direccion.builder()
                 .calle("Nueva calle")
                 .numero(123)
                 .piso(2)
+                .pedido(pedido)
                 .build();
         Direccion savedDireccion = direccionRepository.save(direccion);
         assertNotNull(savedDireccion.getId());
     }
     @Test
-    @DataSet(value = "datasets/direcciones.yml", cleanBefore = true, cleanAfter = true)
-    public void shouldUpdateCategoria(){
+    @DataSet(value = {"datasets/direcciones.yml", "datasets/pedidos.yml",
+            "datasets/usuarios.yml", "datasets/perfiles.yml",
+    }
+            , cleanBefore = true, cleanAfter = true)
+    public void shouldUpdateDireccion(){
         Direccion direccion = direccionRepository.findById(1L).orElseThrow();
         direccion.setCalle("Calle actualizada");
 
@@ -50,8 +63,11 @@ public class DireccionRepositoryTest {
         assertThat(updateDirecion.getCalle()).isEqualTo("Calle actualizada");
     }
     @Test
-    @DataSet(value = "datasets/direcciones.yml", cleanBefore = true, cleanAfter = true)
-    public void shouldDeleteCategoria(){
+    @DataSet(value = {"datasets/direcciones.yml", "datasets/pedidos.yml",
+            "datasets/usuarios.yml", "datasets/perfiles.yml",
+    }
+            , cleanBefore = true, cleanAfter = true)
+    public void shouldDeleteDireccion(){
         direccionRepository.deleteById(1L);
         Direccion deletedDireccion = direccionRepository.findById(1L).orElse(null);
 

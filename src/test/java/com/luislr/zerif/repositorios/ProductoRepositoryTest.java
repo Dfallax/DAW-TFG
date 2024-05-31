@@ -1,12 +1,9 @@
-package com.luislr.zerif.reposotirios;
+package com.luislr.zerif.repositorios;
 
 import com.github.database.rider.core.api.dataset.DataSet;
 import com.github.database.rider.spring.api.DBRider;
 import com.luislr.zerif.entidades.Categoria;
 import com.luislr.zerif.entidades.Producto;
-import com.luislr.zerif.repositorios.ProductoRepository;
-import com.luislr.zerif.repositorios.SubcategoriaRepository;
-import com.luislr.zerif.repositorios.CategoriaRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

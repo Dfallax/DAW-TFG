@@ -1,18 +1,15 @@
-package com.luislr.zerif.reposotirios;
+package com.luislr.zerif.repositorios;
 
 import com.github.database.rider.core.api.dataset.DataSet;
 import com.github.database.rider.spring.api.DBRider;
 import com.luislr.zerif.entidades.SeccionBlog;
 import com.luislr.zerif.entidades.Usuario;
-import com.luislr.zerif.repositorios.SeccionBlogRepository;
-import com.luislr.zerif.repositorios.UsuarioRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;

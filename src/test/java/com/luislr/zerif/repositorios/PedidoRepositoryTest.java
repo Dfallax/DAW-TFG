@@ -49,19 +49,14 @@ public class PedidoRepositoryTest {
 
     @Test
     @DataSet(value = {"datasets/preferencias.yml",
-            "datasets/tarjetas.yml", "datasets/direcciones.yml",
             "datasets/usuarios.yml", "datasets/perfiles.yml"
     }
             , cleanBefore = true, cleanAfter = true)
     public void shouldCreatePedido(){
         Usuario usuario = usuarioRepository.findById(1L).orElseThrow();
-        Direccion direccion = direccionRepository.findById(1L).orElseThrow();
-        Tarjeta tarjeta = tarjetaRepository.findById(1L).orElseThrow();
 
         Pedido pedido = Pedido.builder()
                 .usuario(usuario)
-                .direccion(direccion)
-                .tarjeta(tarjeta)
                 .estado(Pedido.EstadoPedido.PENDIENTE)
                 .build();
 
