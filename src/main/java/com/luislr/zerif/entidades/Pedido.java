@@ -8,9 +8,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDate;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -28,18 +26,16 @@ public class Pedido implements Serializable {
 
     @Column(name = "fecha_pedido", insertable = true, updatable = false)
     @CreationTimestamp
-    private LocalDate fechPedido;
+    private LocalDate fechaPedido;
 
     @ManyToOne
     @JoinColumn(name = "id_usuario", nullable = false)
     private Usuario usuario;
 
-    @OneToOne(cascade = CascadeType.ALL, optional = false)
-    @JoinColumn(name = "id_direccion", referencedColumnName = "id_direccion")
+    @OneToOne(mappedBy = "pedido", cascade = CascadeType.ALL, optional = false)
     private Direccion direccion;
 
-    @OneToOne(cascade = CascadeType.ALL, optional = false)
-    @JoinColumn(name = "id_tarjeta", referencedColumnName = "id_tarjeta")
+    @OneToOne(mappedBy = "pedido", cascade = CascadeType.ALL, optional = false)
     private Tarjeta tarjeta;
 
     @OneToMany(mappedBy = "pedido", cascade = CascadeType.PERSIST)
@@ -47,15 +43,16 @@ public class Pedido implements Serializable {
 
     @Enumerated(EnumType.STRING)
     private EstadoPedido estado;
-    public static enum EstadoPedido{
+
+    public static enum EstadoPedido {
         PENDIENTE, EN_PROCESO, COMPLETADO, CANCELADO, CARRITO;
     }
 
-    public BigDecimal getTotal(){
+    public BigDecimal getTotal() {
         if (articulos == null || articulos.isEmpty()) return BigDecimal.ZERO;
 
         BigDecimal total = articulos.stream()
-                .map(ArticuloPedido::getSubtotal)//  articulo -> articulo.getSubtotal()
+                .map(ArticuloPedido::getSubtotal)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
 
         return total.setScale(2, RoundingMode.HALF_UP);

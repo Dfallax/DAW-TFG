@@ -25,6 +25,8 @@ public class Tarjeta {
     @Column(name = "fecha_caducidad")
     private LocalDate fechCaducidad;
 
-    @OneToOne(mappedBy = "tarjeta", cascade = CascadeType.ALL)
+    @OneToOne
+    @MapsId
+    @JoinColumn(name = "id_pedido")
     private Pedido pedido;
 }

@@ -261,10 +261,8 @@ public class InitData {
     }
 
     public void initSeccionBlog() {
-        // Obtener el usuario admin "luis"
         Usuario usuarioAdmin = usuarioService.findByUsername("luis");
 
-        // Generar 20 entradas para la sección del blog
         List<SeccionBlog> secciones = new ArrayList<>();
         for (int i = 1; i <= 20; i++) {
             SeccionBlog seccionBlog = SeccionBlog.builder()
@@ -286,35 +284,38 @@ public class InitData {
         Random random = new Random();
 
         for (Usuario usuario : usuarios) {
-            if (!usuario.getPerfil().getNombre().equals("ROLE_ADMIN")) { // Excluir usuarios admin
+            if (!usuario.getPerfil().getNombre().equals("ROLE_ADMIN")) { // Excluimos usuarios admin
                 for (int i = 0; i < 5; i++) {
-                    // Crear dirección
+
+                    Pedido.EstadoPedido estado = (i == 0) ? Pedido.EstadoPedido.CARRITO : Pedido.EstadoPedido.COMPLETADO;
+                    Pedido pedido = Pedido.builder()
+                            .estado(estado)
+                            .usuario(usuario)
+                            .build();
+
+                    pedidoService.save(pedido); // Guardamos el pedido primero para obtener el ID
+
                     Direccion direccion = Direccion.builder()
                             .calle("Calle " + random.nextInt(100))
                             .numero(random.nextInt(100))
                             .piso(random.nextInt(10))
                             .puerta((char) (random.nextInt(26) + 'A'))
                             .ciudad("Ciudad " + random.nextInt(100))
+                            .pedido(pedido)
                             .build();
                     direccionService.save(direccion); // Guardar dirección
 
-                    // Crear tarjeta
                     Tarjeta tarjeta = Tarjeta.builder()
                             .numTarjeta("4111111111111111")
                             .cv("123")
                             .fechCaducidad(LocalDate.now().plusYears(3))
+                            .pedido(pedido)
                             .build();
-                    tarjetaService.save(tarjeta); // Guardar tarjeta
+                    tarjetaService.save(tarjeta);
 
-                    Pedido.EstadoPedido estado = (i == 0) ? Pedido.EstadoPedido.CARRITO : Pedido.EstadoPedido.COMPLETADO;
-                    Pedido pedido = Pedido.builder()
-                            .estado(estado)
-                            .usuario(usuario)
-                            .direccion(direccion)
-                            .tarjeta(tarjeta)
-                            .build();
-
-                    pedidoService.save(pedido); // Guardar el pedido primero para obtener el ID
+                    pedido.setDireccion(direccion);
+                    pedido.setTarjeta(tarjeta);
+                    pedidoService.save(pedido);
 
                     // Agregar artículos al pedido después de guardar el pedido para obtener su ID
                     for (int j = 0; j < 5; j++) {

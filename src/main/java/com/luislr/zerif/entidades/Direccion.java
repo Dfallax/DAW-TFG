@@ -26,6 +26,8 @@ public class Direccion {
 
     private String ciudad;
 
-    @OneToOne(mappedBy = "direccion", cascade = CascadeType.ALL)
+    @OneToOne
+    @MapsId
+    @JoinColumn(name = "id_pedido")
     private Pedido pedido;
 }
