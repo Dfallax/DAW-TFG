@@ -1,5 +1,7 @@
 package com.luislr.zerif.controladores;
 
+import com.luislr.zerif.dto.direccion.DireccionCompraDto;
+import com.luislr.zerif.dto.tarjeta.TarjetaCompraDto;
 import com.luislr.zerif.entidades.*;
 import com.luislr.zerif.servicios.ArticuloPedidoService;
 import com.luislr.zerif.servicios.PedidoService;
@@ -15,9 +17,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Optional;
 
 @Slf4j
@@ -108,6 +107,8 @@ public class PedidoController {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         Pedido pedido = pedidoService.obtenerCarrito(username);
         model.addAttribute("carrito", pedido);
+        model.addAttribute("tarjeta", new TarjetaCompraDto());
+        model.addAttribute("direccion", new DireccionCompraDto());
         return "pedido/proceso-compra";
     }
 }

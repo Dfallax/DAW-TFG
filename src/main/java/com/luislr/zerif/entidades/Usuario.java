@@ -1,9 +1,11 @@
 package com.luislr.zerif.entidades;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.io.Serializable;
@@ -36,9 +38,9 @@ public class Usuario implements Serializable {
 
   private String telefono;
 
-  @Column(name = "fecha_alta", insertable = true, updatable = false)
+  @Column(name = "fecha_alta", updatable = false)
   @CreationTimestamp
-  private LocalDate fecha_alta;
+  private LocalDate fechaAlta;
 
   @OneToMany(mappedBy = "usuario", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
   private List<ValoracionProducto> valoraciones;

@@ -9,13 +9,12 @@ import java.time.format.DateTimeFormatter;
 public class YearMonthAttributeConverter implements AttributeConverter<YearMonth, String> {
 
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("MM/yyyy");
-
     @Override
-    public String convertToDatabaseColumn(YearMonth attribute) {
-        if (attribute == null) {
+    public String convertToDatabaseColumn(YearMonth fecha) {
+        if (fecha == null) {
             return null;
         }
-        return attribute.format(FORMATTER);
+        return fecha.format(FORMATTER);
     }
 
     @Override

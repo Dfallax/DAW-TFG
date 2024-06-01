@@ -62,7 +62,9 @@
             </h2>
             <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
-                    <form>
+                    <form method="post" action="#" enctype="multipart/form-data"
+                          th:action="@{/direccion/compra/new}"
+                          th:object="${direccion}">
                         <div class="mb-3">
                             <label for="calle" class="form-label">Calle</label>
                             <input type="text" class="form-control" id="calle" name="calle">
@@ -99,21 +101,34 @@
             </h2>
             <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
-                    <form>
-                        <div class="mb-3">
-                            <label for="num_tarjeta" class="form-label">Número de Tarjeta</label>
-                            <input type="text" class="form-control" id="num_tarjeta" name="num_tarjeta">
+                    <form method="post" action="#" enctype="multipart/form-data"
+                          th:action="@{/tarjeta/compra/new}"
+                          th:object="${tarjeta}">
+                        <div class="input-group mb-3" th:classappend="${#fields.hasErrors('numTarjeta')} ? 'has-error'">
+                            <label for="numTarjeta" class="form-label">Número de Tarjeta</label>
+                            <input type="text" class="form-control" id="numTarjeta" name="numTarjeta" required pattern="\d{16}" th:field="*{numTarjeta}">
+                            <span th:if="${#fields.hasErrors('numTarjeta')}" th:errors="*{numTarjeta}"
+                                  class="help-block" id="numTarjeta-error">Errores</span>
                         </div>
-                        <div class="mb-3">
+                        <div class="input-group mb-3">
                             <label for="cv" class="form-label">CV</label>
-                            <input type="text" class="form-control" id="cv" name="cv">
+                            <input type="text" class="form-control" id="cv" name="cv" required pattern="\d{3,4}" th:field="*{cv}">
+                            <span th:if="${#fields.hasErrors('cv')}" th:errors="*{cv}"
+                                  class="help-block" id="cv-error">Errores</span>
                         </div>
-                        <div class="mb-3">
-                            <label for="fech_caducidad" class="form-label">Fecha de Caducidad</label>
-                            <input type="date" class="form-control" id="fech_caducidad" name="fech_caducidad">
+                        <div class="input-group mb-3" th:classappend="${#fields.hasErrors('mesCaducidad')} ? 'has-error'">
+                            <label for="mesCaducidad" class="form-label">Mes de Caducidad</label>
+                            <input type="number" class="form-control" id="mesCaducidad" name="mesCaducidad" required min="1" max="12" th:field="*{mesCaducidad}">
+                            <span th:if="${#fields.hasErrors('mesCaducidad')}" th:errors="*{mesCaducidad}"
+                                  class="help-block" id="mesCaducidad-error">Errores</span>
                         </div>
-                        <button type="button" class="btn btn-primary">Guardar</button>
-                        <button type="button" class="btn btn-secondary">Cambiar</button>
+                        <div class="input-group mb-3" th:classappend="${#fields.hasErrors('yearCaducidad')} ? 'has-error'">
+                            <label for="yearCaducidad" class="form-label">Mes de Caducidad</label>
+                            <input type="text" class="form-control" id="yearCaducidad" name="yearCaducidad" required pattern="\d{2}" th:field="*{yearCaducidad}">
+                            <span th:if="${#fields.hasErrors('yearCaducidad')}" th:errors="*{yearCaducidad}"
+                                  class="help-block" id="yearCaducidad-error">Errores</span>
+                        </div>
+                        <button type="submit" class="btn btn-success">Guardar</button>
                     </form>
                 </div>
             </div>
@@ -133,7 +148,6 @@
 <!-- Scripts -->
 <th:block th:replace="~{fragmentos/js-final::jsfinal(~{::script})}">
     <script th:src="@{/js/index.js}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </th:block>
 </body>
 </html>
