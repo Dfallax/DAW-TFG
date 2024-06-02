@@ -1,12 +1,13 @@
 package com.luislr.zerif.controladores;
 
-import com.luislr.zerif.dto.direccion.DireccionCompraDto;
-import com.luislr.zerif.dto.tarjeta.TarjetaCompraDto;
+import com.luislr.zerif.dto.PedidoCompraDto;
+import com.luislr.zerif.dto.direccion.DireccionCreateDto;
+import com.luislr.zerif.dto.direccion.DireccionMapper;
+import com.luislr.zerif.dto.tarjeta.TarjetaCreateDto;
+import com.luislr.zerif.dto.tarjeta.TarjetaMapper;
 import com.luislr.zerif.entidades.*;
-import com.luislr.zerif.servicios.ArticuloPedidoService;
-import com.luislr.zerif.servicios.PedidoService;
-import com.luislr.zerif.servicios.ProductoService;
-import com.luislr.zerif.servicios.UsuarioService;
+import com.luislr.zerif.servicios.*;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -30,6 +32,10 @@ public class PedidoController {
     private final ArticuloPedidoService articuloPedidoService;
     private final ProductoService productoService;
     private final UsuarioService usuarioService;
+    private final DireccionService direccionService;
+    private final TarjetaService tarjetaService;
+    private final DireccionMapper direccionMapper;
+    private final TarjetaMapper tarjetaMapper;
 
     @GetMapping("/carrito")
     public String verCarrito(Model model) {
@@ -103,12 +109,52 @@ public class PedidoController {
     }
 
     @GetMapping("/carrito/compra")
-    public String procesoCompra(Model model){
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+    public String procesoCompra(@AuthenticationPrincipal UserDetails userDetails,
+                                Model model){
+        String username = userDetails.getUsername();
         Pedido pedido = pedidoService.obtenerCarrito(username);
-        model.addAttribute("carrito", pedido);
-        model.addAttribute("tarjeta", new TarjetaCompraDto());
-        model.addAttribute("direccion", new DireccionCompraDto());
+        PedidoCompraDto pedidoCompraDto = new PedidoCompraDto();
+        pedidoCompraDto.setTarjeta(new TarjetaCreateDto());
+        pedidoCompraDto.setDireccion(new DireccionCreateDto());
+        model.addAttribute("pedidoCompraDto",pedidoCompraDto);
+        model.addAttribute("carrito",pedido);
         return "pedido/proceso-compra";
+    }
+
+    @PostMapping("/carrito/compra/submit")
+    public String nuevoPedidoSubmit(@AuthenticationPrincipal UserDetails userDetails,
+                                    @Valid @ModelAttribute("pedidoCompraDto") PedidoCompraDto pedidoCompraDto,
+                                    BindingResult bindingResult,
+                                    Model model){
+        String username = userDetails.getUsername();
+        Pedido pedido = pedidoService.obtenerCarrito(username);
+        if (bindingResult.hasErrors()) {
+            log.info("Hay un error");
+            bindingResult.getFieldErrors()
+                    .forEach(e -> log.info("field: " + e.getField() + ", rejected value: " + e.getRejectedValue()));
+
+            model.addAttribute("carrito",pedido);
+            return "pedido/proceso-compra";
+        }
+
+        pedido.setId(null);
+        pedido.setEstado(Pedido.EstadoPedido.PENDIENTE);
+
+        pedidoService.save(pedido);
+
+        Direccion direccion = direccionMapper.toEntity(pedidoCompraDto.getDireccion());
+        direccion.setPedido(pedido);
+        direccionService.save(direccion);
+
+        Tarjeta tarjeta = tarjetaMapper.toEntity(pedidoCompraDto.getTarjeta());
+        tarjeta.setPedido(pedido);
+        tarjetaService.save(tarjeta);
+
+        pedido.setDireccion(direccion);
+        pedido.setTarjeta(tarjeta);
+        pedidoService.save(pedido);
+
+        return "redirect:/index";
+
     }
 }

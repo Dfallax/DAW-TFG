@@ -1,0 +1,7 @@
+label{
+    margin-right: 5pt;
+}
+
+.has-error .help-block {
+    color: red;
+}

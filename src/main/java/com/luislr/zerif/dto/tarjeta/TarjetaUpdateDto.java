@@ -1,10 +1,19 @@
 package com.luislr.zerif.dto.tarjeta;
 
 import jakarta.validation.constraints.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
-public class TarjetaCompraDto {
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+public class TarjetaUpdateDto {
+    @NotNull(message = "El ID es obligatorio")
+    private Long id;
+
     @NotBlank(message = "El número de tarjeta es obligatorio")
     @Size(min = 16, max = 16, message = "El número de tarjeta debe tener 16 dígitos")
     private String numTarjeta;

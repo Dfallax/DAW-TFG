@@ -1,20 +1,10 @@
 package com.luislr.zerif.controladores;
 
-import com.luislr.zerif.dto.direccion.DireccionCompraDto;
-import com.luislr.zerif.entidades.Direccion;
-import com.luislr.zerif.entidades.Pedido;
+import com.luislr.zerif.dto.direccion.DireccionMapper;
 import com.luislr.zerif.servicios.PedidoService;
-import com.luislr.zerif.utilidades.DireccionUtilidades;
-import com.luislr.zerif.utilidades.TarjetaUtilidades;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Slf4j
@@ -24,25 +14,34 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class DireccionController {
 
     private final PedidoService pedidoService;
+    private final DireccionMapper mapper;
+/*
+    @GetMapping("/compra/new")
+    public String compraForm(Model model){
+        model.addAttribute("mascotaDto", new Mascota());
+    }
 
-    @PostMapping("/compra/new")
-    public String pedidoFromCarrito(@Valid @ModelAttribute("direccion") DireccionCompraDto direccionCompraDto,
+
+    @PostMapping("/compra/new/submit")
+    public String direccionCarrito(@Valid @ModelAttribute("direccion") Dire tarjetaCreateDto,
                                     BindingResult bindingResult,
+                                   @AuthenticationPrincipal UserDetails userDetails,
                                     Model model) {
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        String username = userDetails.getUsername();
         Pedido carrito = pedidoService.obtenerCarrito(username);
+
         if (bindingResult.hasErrors()) {
             log.info("Hay errores en el formulario");
-            bindingResult.getFieldErrors()
-                    .forEach(e -> log.info("field: " + e.getField() + ", rejected value: " + e.getRejectedValue()));
+            bindingResult.getFieldErrors();
+            return "direccion-compra";
         } else {
-            Direccion direccion = DireccionUtilidades.convertToEntity(direccionCompraDto);
-            carrito.setDireccion(direccion);
+            Tarjeta tarjeta = TarjetaUtilidades.convertToEntityCompra(tarjetaCreateDto);
+            carrito.setTarjeta(tarjeta);
+            model.addAttribute("carrito", carrito);
+            model.addAttribute("tarjeta", tarjetaCreateDto);
+            model.addAttribute("direccion", DireccionUtilidades.convertToDto(carrito.getDireccion()));
         }
-        model.addAttribute("carrito", carrito);
-        model.addAttribute("direccion",DireccionUtilidades.convertToDto(carrito.getDireccion()));
-        model.addAttribute("tarjeta", TarjetaUtilidades.convertToDtoCompra(carrito.getTarjeta()));
+        return "redirect:/tarjeta/compra/new";
 
-        return "pedido/proceso-compra";
-    }
+    }*/
 }

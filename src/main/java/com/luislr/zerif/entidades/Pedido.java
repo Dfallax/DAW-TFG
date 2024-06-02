@@ -24,7 +24,7 @@ public class Pedido implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "fecha_pedido", insertable = true, updatable = false)
+    @Column(name = "fecha_pedido", updatable = false)
     @CreationTimestamp
     private LocalDate fechaPedido;
 
@@ -44,8 +44,8 @@ public class Pedido implements Serializable {
     @Enumerated(EnumType.STRING)
     private EstadoPedido estado;
 
-    public static enum EstadoPedido {
-        PENDIENTE, EN_PROCESO, COMPLETADO, CANCELADO, CARRITO;
+    public enum EstadoPedido {
+        PENDIENTE, EN_PROCESO, COMPLETADO, CANCELADO, CARRITO
     }
 
     public BigDecimal getTotal() {

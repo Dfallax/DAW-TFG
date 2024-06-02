@@ -5,13 +5,18 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class DireccionCompraDto {
+@Builder
+public class DireccionUpdateDto {
+    @NotNull(message = "El ID es obligatorio")
+    private Long id;
+
     @NotBlank(message = "La calle es obligatoria")
     private String calle;
 
