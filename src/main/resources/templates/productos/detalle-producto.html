@@ -7,14 +7,14 @@
 </head>
 <body class="mx-3">
 <header th:replace="~{fragmentos/header::header}"></header>
+<!--Migas de pan-->
+<nav aria-label="breadcrumb" class="my-5 ms-3">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item active" aria-current="page"><a th:href="@{/}">Inicio</a></li>
+        <li class="breadcrumb-item active" aria-current="page"><a href="#">Detalle Producto</a></li>
+    </ol>
+</nav>
 <main class="container">
-    <!--Migas de pan-->
-    <nav aria-label="breadcrumb" class="my-5 ms-3">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item active" aria-current="page"><a th:href="@{/}">Inicio</a></li>
-            <li class="breadcrumb-item active" aria-current="page"><a href="#">Detalle Producto</a></li>
-        </ol>
-    </nav>
     <!--Ficha del producto-->
     <section class="container">
         <div class="row mb-5">
@@ -26,7 +26,7 @@
                 <div th:text="${producto.get().descripcion}"></div>
                 <div class="my-5">
                     <div class="d-flex justify-content-between">
-                        <div th:unless="${producto.get().getCategoria().getNombre().equals('eventos')}"
+                        <div sec:authorize="isAuthenticated()" th:unless="${producto.get().getCategoria().getNombre().equals('eventos')}"
                              class="d-flex justify-content-start align-items-center">
                             <svg id="boton-quitar" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-dash-circle me-4" viewBox="0 0 16 16">
                                 <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
@@ -48,20 +48,23 @@
                         </h3>
                     </div>
                     <!--Precio por unidad-->
-                    <div th:unless="${producto.get().getCategoria().getNombre().equals('eventos')}" class="mt-2">
+                    <div sec:authorize="isAuthenticated()" th:unless="${producto.get().getCategoria().getNombre().equals('eventos')}" class="mt-2">
                         <span>Precio por unidad </span>
                         <span class="precio" id="precio-unitario" th:text="${producto.get().precio}"></span>
                         <span>€</span>
                     </div>
                 </div>
                 <!--Botonera Normal-->
-                <div th:unless="${producto.get().getCategoria().getNombre().equals('eventos')}">
+                <div sec:authorize="isAuthenticated()" th:unless="${producto.get().getCategoria().getNombre().equals('eventos')}">
                     <button class="btn btn-light border border-black" onclick="procesoCompra()" >Comprar</button>
                     <button class="btn btn-warning border border-black">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart3" viewBox="0 0 16 16">
                             <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l.84 4.479 9.144-.459L13.89 4zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
                         </svg>
                     </button>
+                </div>
+                <div sec:authorize="!isAuthenticated()">
+                    <button class="btn btn-light border border-black" onclick="login()" >Comprar</button>
                 </div>
                 <!--Botonera Para Eventos-->
                 <div th:unless="${!producto.get().getCategoria().getNombre().equals('eventos')}">
