@@ -19,10 +19,10 @@
     <section class="container">
         <div class="row mb-5">
             <div class="col-lg-6 col-md-12 my-3 ">
-                <img id="imagen-producto" th:src="${producto.get().foto}" alt="Imagen del producto">
+                <img src="#" id="imagen-producto" th:src="${producto.get().foto}" alt="Imagen del producto">
             </div>
             <div class="col-lg-6 col-md-12 my-3">
-                <h2 th:text="${producto.get().nombre}" ></h2>
+                <h2 id="nombre-producto" th:text="${producto.get().nombre}" ></h2>
                 <div th:text="${producto.get().descripcion}"></div>
                 <div class="my-5">
                     <div class="d-flex justify-content-between">
@@ -32,7 +32,7 @@
                                 <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
                                 <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8"/>
                             </svg>
-                            <h3 id=cantidad class="me-4">1</h3>
+                            <h3 id=cantidad class="me-4">0</h3>
                             <svg  id="boton-agregar" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus-circle me-4" viewBox="0 0 16 16">
                                 <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
                                 <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
@@ -56,7 +56,7 @@
                 </div>
                 <!--Botonera Normal-->
                 <div th:unless="${producto.get().getCategoria().getNombre().equals('eventos')}">
-                    <button class="btn btn-light border border-black">Comprar</button>
+                    <button class="btn btn-light border border-black" onclick="procesoCompra()" >Comprar</button>
                     <button class="btn btn-warning border border-black">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart3" viewBox="0 0 16 16">
                             <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l.84 4.479 9.144-.459L13.89 4zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
@@ -74,9 +74,9 @@
     <section th:unless="${listaProducto==null}" class="container">
         <h3 class=" my-3">Productos relacionados</h3>
         <div id="scroll">
-            <id id="scroll-content">
+            <div id="scroll-content">
                 <span th:replace="~{fragmentos/item-producto::item-producto}"></span>
-            </id>
+            </div>
         </div>
     </section>
 </main>

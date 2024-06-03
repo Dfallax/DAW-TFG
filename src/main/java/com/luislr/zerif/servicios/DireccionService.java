@@ -14,4 +14,11 @@ public class DireccionService {
         direccionRepository.save(direccion);
     }
 
+    public Direccion update(Direccion direccion) {
+        return direccionRepository.saveAndFlush(direccion);
+    }
+
+    public boolean existsById(Long id) {
+        return direccionRepository.existsById(id);
+    }
 }

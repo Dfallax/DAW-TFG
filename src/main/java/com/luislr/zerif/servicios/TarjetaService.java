@@ -14,4 +14,11 @@ public class TarjetaService {
         tarjetaRepository.save(tarjeta);
     }
 
+    public Tarjeta update(Tarjeta tarjeta) {
+        return tarjetaRepository.saveAndFlush(tarjeta);
+    }
+
+    public boolean existsById(Long id) {
+        return tarjetaRepository.existsById(id);
+    }
 }

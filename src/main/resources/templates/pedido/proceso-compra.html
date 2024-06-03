@@ -9,7 +9,7 @@
 <header th:replace="~{fragmentos/header::header}"></header>
 
 <main class="mx-auto">
-    <form method="post" th:action="@{/pedido/carrito/compra/submit}" th:object="${pedidoCompraDto}">
+    <form method="post" th:action="@{/pedido/compra/submit}" th:object="${pedidoCompraDto}">
         <!-- Acordeón para finalizar pedido -->
         <div class="accordion" id="accordionExample">
 
@@ -31,7 +31,7 @@
                                 <th>Precio Total</th>
                             </tr>
                             </thead>
-                            <tbody th:each="articulo : ${carrito.articulos}">
+                            <tbody th:each="articulo : ${pedidoCompraDto.pedido.articulos}">
                             <tr>
                                 <td th:text="${articulo.producto.nombre}">Producto 1</td>
                                 <td th:text="${articulo.producto.precio}">$10</td>
@@ -44,7 +44,7 @@
                                 <td>Total:</td>
                                 <td></td>
                                 <td></td>
-                                <td th:text="${#numbers.formatDecimal(carrito.getTotal(), 2, 2)}+'€'"></td>
+                                <td th:text="${#numbers.formatDecimal(pedidoCompraDto.pedido.getTotal(), 2, 2)}+'€'"></td>
                             </tr>
                             </tfoot>
                         </table>

@@ -23,9 +23,10 @@ public class PedidoService {
 
     private final ArticuloPedidoRepository articuloPedidoRepository;
 
-    public void save(Pedido pedido) {
-        pedidoRepository.save(pedido);
+    public Pedido save(Pedido pedido) {
+        return pedidoRepository.save(pedido);
     }
+
     @Transactional
     public void eliminarArticulo(ArticuloPedidoPK id) {
         articuloPedidoRepository.deleteById(id);

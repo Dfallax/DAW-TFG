@@ -19,6 +19,13 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.YearMonth;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -117,44 +124,143 @@ public class PedidoController {
         pedidoCompraDto.setTarjeta(new TarjetaCreateDto());
         pedidoCompraDto.setDireccion(new DireccionCreateDto());
         model.addAttribute("pedidoCompraDto",pedidoCompraDto);
-        model.addAttribute("carrito",pedido);
         return "pedido/proceso-compra";
     }
 
-    @PostMapping("/carrito/compra/submit")
-    public String nuevoPedidoSubmit(@AuthenticationPrincipal UserDetails userDetails,
-                                    @Valid @ModelAttribute("pedidoCompraDto") PedidoCompraDto pedidoCompraDto,
+    @GetMapping("/producto/compra")
+    public String procesoCompraProducto(
+            @RequestParam String nameProduct,
+            @RequestParam int cantidad,
+            Model model
+    ){
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        Producto producto = productoService.findByNombre(nameProduct);
+        Pedido pedido = Pedido.builder()
+                .usuario(usuarioService.findByUsername(username))
+                .estado(Pedido.EstadoPedido.PENDIENTE)
+                .build();
+        List<ArticuloPedido> articuloPedidos = Collections.singletonList(
+                ArticuloPedido.builder()
+                        .producto(producto)
+                        .cantidad(cantidad)
+                        .pedido(pedido)
+                        .precioUnidad(BigDecimal.valueOf(producto.getPrecio()))
+                        .build()
+        );
+        pedido.setArticulos(articuloPedidos);
+
+        PedidoCompraDto pedidoCompraDto = new PedidoCompraDto();
+        pedidoCompraDto.setPedido(pedido);
+        pedidoCompraDto.setTarjeta(new TarjetaCreateDto());
+        pedidoCompraDto.setDireccion(new DireccionCreateDto());
+
+        model.addAttribute("pedidoCompraDto",pedidoCompraDto);
+        return "pedido/proceso-compra";
+    }
+
+    @PostMapping("/compra/submit")
+    public String nuevoPedidoSubmit(@Valid @ModelAttribute("pedidoCompraDto") PedidoCompraDto pedidoCompraDto,
                                     BindingResult bindingResult,
                                     Model model){
-        String username = userDetails.getUsername();
-        Pedido pedido = pedidoService.obtenerCarrito(username);
-        if (bindingResult.hasErrors()) {
-            log.info("Hay un error");
-            bindingResult.getFieldErrors()
-                    .forEach(e -> log.info("field: " + e.getField() + ", rejected value: " + e.getRejectedValue()));
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        if (pedidoCompraDto.getPedido().getEstado()!= Pedido.EstadoPedido.CARRITO){
+            Pedido pedido = pedidoCompraDto.getPedido();
+            if (pedidoCompraDto.getPedido().getId()==null){
+                pedidoService.save(pedido);
+            }
 
-            model.addAttribute("carrito",pedido);
-            return "pedido/proceso-compra";
+            if (bindingResult.hasErrors()) {
+                log.info("Hay un error");
+                bindingResult.getFieldErrors()
+                        .forEach(e -> log.info("field: " + e.getField() + ", rejected value: " + e.getRejectedValue()));
+
+                model.addAttribute("pedidoCompraDto", pedidoCompraDto);
+                return "pedido/proceso-compra";
+            }
+
+            Direccion direccion = direccionMapper.toEntity(pedidoCompraDto.getDireccion());
+            Tarjeta tarjeta = tarjetaMapper.toEntity(pedidoCompraDto.getTarjeta());
+
+            direccion.setPedido(pedido);
+            direccion.setId(pedido.getId());
+            tarjeta.setId(pedido.getId());
+            tarjeta.setPedido(pedido);
+
+            if (direccion.getId() != null && direccionService.existsById(direccion.getId())) {
+                direccion = direccionService.update(direccion);
+            } else {
+                direccionService.save(direccion);
+            }
+
+            if (tarjeta.getId() != null && tarjetaService.existsById(tarjeta.getId())) {
+                tarjeta = tarjetaService.update(tarjeta);
+            } else {
+                tarjetaService.save(tarjeta);
+            }
+
+            pedido.setDireccion(direccion);
+            pedido.setTarjeta(tarjeta);
+            pedido.setEstado(Pedido.EstadoPedido.PENDIENTE);
+            pedido.setFechaPedido(LocalDate.now());
+
+            pedidoService.save(pedido);
+
+            // Creamos el carrito
+            Pedido carrito = Pedido.builder()
+                    .usuario(pedido.getUsuario())
+                    .estado(Pedido.EstadoPedido.CARRITO)
+                    .build();
+
+            pedidoService.save(carrito);
+            return "redirect:/index";
+        }else {
+            Pedido pedido = pedidoService.obtenerCarrito(username);
+            if (bindingResult.hasErrors()) {
+                log.info("Hay un error");
+                bindingResult.getFieldErrors()
+                        .forEach(e -> log.info("field: " + e.getField() + ", rejected value: " + e.getRejectedValue()));
+
+                model.addAttribute("pedidoCompraDto", pedidoCompraDto);
+                return "pedido/proceso-compra";
+            }
+
+            Direccion direccion = direccionMapper.toEntity(pedidoCompraDto.getDireccion());
+            Tarjeta tarjeta = tarjetaMapper.toEntity(pedidoCompraDto.getTarjeta());
+
+            direccion.setPedido(pedido);
+            direccion.setId(pedido.getId());
+            tarjeta.setId(pedido.getId());
+            tarjeta.setPedido(pedido);
+
+            if (direccion.getId() != null && direccionService.existsById(direccion.getId())) {
+                direccion = direccionService.update(direccion);
+            } else {
+                direccionService.save(direccion);
+            }
+
+            if (tarjeta.getId() != null && tarjetaService.existsById(tarjeta.getId())) {
+                tarjeta = tarjetaService.update(tarjeta);
+            } else {
+                tarjetaService.save(tarjeta);
+            }
+
+            pedido.setDireccion(direccion);
+            pedido.setTarjeta(tarjeta);
+            pedido.setEstado(Pedido.EstadoPedido.PENDIENTE);
+            pedido.setFechaPedido(LocalDate.now());
+
+            pedidoService.save(pedido);
+
+            // Creamos el carrito
+            Pedido carrito = Pedido.builder()
+                    .usuario(pedido.getUsuario())
+                    .estado(Pedido.EstadoPedido.CARRITO)
+                    .build();
+
+            pedidoService.save(carrito);
+            return "redirect:/index";
         }
-
-        pedido.setId(null);
-        pedido.setEstado(Pedido.EstadoPedido.PENDIENTE);
-
-        pedidoService.save(pedido);
-
-        Direccion direccion = direccionMapper.toEntity(pedidoCompraDto.getDireccion());
-        direccion.setPedido(pedido);
-        direccionService.save(direccion);
-
-        Tarjeta tarjeta = tarjetaMapper.toEntity(pedidoCompraDto.getTarjeta());
-        tarjeta.setPedido(pedido);
-        tarjetaService.save(tarjeta);
-
-        pedido.setDireccion(direccion);
-        pedido.setTarjeta(tarjeta);
-        pedidoService.save(pedido);
-
-        return "redirect:/index";
-
     }
+
+
 }

@@ -15,20 +15,20 @@ import lombok.NoArgsConstructor;
 @Builder
 public class DireccionCreateDto {
     @NotBlank(message = "La calle es obligatoria.")
-    private String calle;
+    private String calle="Este";
 
     @NotNull(message = "El número es obligatorio.")
     @Min(value = 1, message = "El número debe ser mayor que 0.")
-    private Integer numero;
+    private Integer numero=4;
 
     @NotNull(message = "El piso es obligatorio.")
     @Min(value = 0, message = "El piso no puede ser negativo.")
-    private Integer piso;
+    private Integer piso=3;
 
     @NotBlank(message = "La puerta es obligatoria.")
     @Pattern(regexp = "^[A-Za-z]$", message = "La puerta debe ser un solo carácter alfabético.")
-    private String puerta;
+    private String puerta="P";
 
     @NotBlank(message = "La ciudad es obligatoria.")
-    private String ciudad;
+    private String ciudad="Pi pi";
 }
