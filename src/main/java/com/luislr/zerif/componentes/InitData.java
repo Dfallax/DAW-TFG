@@ -300,29 +300,29 @@ public class InitData {
                             .build();
 
                     pedidoService.save(pedido); // Guardamos el pedido primero para obtener el ID
+                    if (pedido.getEstado()!= Pedido.EstadoPedido.CARRITO) {
+                        Direccion direccion = Direccion.builder()
+                                .calle("Calle " + random.nextInt(100))
+                                .numero(random.nextInt(100))
+                                .piso(random.nextInt(10))
+                                .puerta((char) (random.nextInt(26) + 'A'))
+                                .ciudad("Ciudad " + random.nextInt(100))
+                                .pedido(pedido)
+                                .build();
+                        direccionService.save(direccion); // Guardar dirección
 
-                    Direccion direccion = Direccion.builder()
-                            .calle("Calle " + random.nextInt(100))
-                            .numero(random.nextInt(100))
-                            .piso(random.nextInt(10))
-                            .puerta((char) (random.nextInt(26) + 'A'))
-                            .ciudad("Ciudad " + random.nextInt(100))
-                            .pedido(pedido)
-                            .build();
-                    direccionService.save(direccion); // Guardar dirección
+                        Tarjeta tarjeta = Tarjeta.builder()
+                                .numTarjeta("4111111111111111")
+                                .cv("123")
+                                .fechCaducidad(YearMonth.now().plusYears(3))
+                                .pedido(pedido)
+                                .build();
+                        tarjetaService.save(tarjeta);
 
-                    Tarjeta tarjeta = Tarjeta.builder()
-                            .numTarjeta("4111111111111111")
-                            .cv("123")
-                            .fechCaducidad(YearMonth.now().plusYears(3))
-                            .pedido(pedido)
-                            .build();
-                    tarjetaService.save(tarjeta);
-
-                    pedido.setDireccion(direccion);
-                    pedido.setTarjeta(tarjeta);
-                    pedidoService.save(pedido);
-
+                        pedido.setDireccion(direccion);
+                        pedido.setTarjeta(tarjeta);
+                        pedidoService.save(pedido);
+                    }
                     // Agregar artículos al pedido después de guardar el pedido para obtener su ID
                     for (int j = 0; j < 5; j++) {
                         Producto producto = productos.get(random.nextInt(productos.size()));
@@ -332,9 +332,9 @@ public class InitData {
                                 .pedido(pedido)
                                 .producto(producto)
                                 .precioUnidad(BigDecimal.valueOf(producto.getPrecio()))
-                                .cantidad(random.nextInt(5) + 1) // Cantidad entre 1 y 5
+                                .cantidad(random.nextInt(5) + 1)
                                 .build();
-                        articuloPedidoService.save(articulo); // Guardar el artículo
+                        articuloPedidoService.save(articulo);
                     }
                 }
             }

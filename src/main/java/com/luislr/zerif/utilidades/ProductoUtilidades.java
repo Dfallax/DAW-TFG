@@ -5,7 +5,6 @@ import com.luislr.zerif.entidades.ValoracionProducto;
 import lombok.experimental.UtilityClass;
 
 import java.util.List;
-import java.util.OptionalDouble;
 
 @UtilityClass
 public class ProductoUtilidades {
@@ -21,22 +20,4 @@ public class ProductoUtilidades {
         });
     }
 
-    public double[] obtenerRangoDePrecios(List<Producto> listaProductos) {
-        // Encontrar el precio más bajo
-        OptionalDouble precioMin = listaProductos.stream()
-                .mapToDouble(Producto::getPrecio)
-                .min();
-
-        // Encontrar el precio más alto
-        OptionalDouble precioMax = listaProductos.stream()
-                .mapToDouble(Producto::getPrecio)
-                .max();
-
-        // Si ambos valores están presentes, retornar el rango, de lo contrario, retornar un rango predeterminado
-        if (precioMin.isPresent() && precioMax.isPresent()) {
-            return new double[]{precioMin.getAsDouble(), precioMax.getAsDouble()};
-        } else {
-            return new double[]{0.0, 1.0};
-        }
-    }
 }

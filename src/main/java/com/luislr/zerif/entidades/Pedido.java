@@ -32,10 +32,10 @@ public class Pedido implements Serializable {
     @JoinColumn(name = "id_usuario", nullable = false)
     private Usuario usuario;
 
-    @OneToOne(mappedBy = "pedido", cascade = CascadeType.ALL, optional = false)
+    @OneToOne(mappedBy = "pedido", cascade = CascadeType.ALL)
     private Direccion direccion;
 
-    @OneToOne(mappedBy = "pedido", cascade = CascadeType.ALL, optional = false)
+    @OneToOne(mappedBy = "pedido", cascade = CascadeType.ALL)
     private Tarjeta tarjeta;
 
     @OneToMany(mappedBy = "pedido", cascade = CascadeType.PERSIST)

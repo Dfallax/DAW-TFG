@@ -31,23 +31,29 @@
                                 <th>Precio Total</th>
                             </tr>
                             </thead>
-                            <tbody th:each="articulo : ${pedidoCompraDto.pedido.articulos}">
+                            <tbody th:each="articulo : ${pedido.articulos}">
                             <tr>
                                 <td th:text="${articulo.producto.nombre}">Producto 1</td>
                                 <td th:text="${articulo.producto.precio}">$10</td>
                                 <td th:text="${articulo.cantidad}">2</td>
-                                <td th:text="${#numbers.formatDecimal(articulo.precioUnidad * articulo.cantidad, 2, 2)}">$20</td>
+                                <td th:text="${#numbers.formatDecimal(articulo.getSubtotal(), 2, 2)}">$20</td>
                             </tr>
                             </tbody>
                             <tfoot>
                             <tr>
                                 <td>Total:</td>
-                                <td></td>
-                                <td></td>
-                                <td th:text="${#numbers.formatDecimal(pedidoCompraDto.pedido.getTotal(), 2, 2)}+'€'"></td>
+                                <td>
+                                    <input type="hidden" id="idProducto" name="idProducto" th:field="*{idProducto}" th:value="*{idProducto}">
+                                </td>
+                                <td>
+                                    <input type="hidden" id="cantidad" name="cantidad" th:field="*{cantidad}" th:value="*{cantidad}">
+                                </td>
+                                <td th:text="${#numbers.formatDecimal(pedido.getTotal(), 2, 2)}+'€'"></td>
                             </tr>
                             </tfoot>
                         </table>
+                        <div>
+                        </div>
                     </div>
                 </div>
             </div>
