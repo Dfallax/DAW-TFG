@@ -25,17 +25,21 @@ public class SubcategoriaRepositoryTest {
     @Autowired
     private CategoriaRepository categoriaRepository;
 
+    private static final Long ID_CATEGORIA = 1L;
+    private static final Long ID_SUBCATEGORIA = 1L;
+
+
     @Test
     @DataSet(value = {"datasets/subcategorias.yml", "datasets/categorias.yml"},
             cleanBefore = true, cleanAfter = true)
     public void shouldFindSubcategoriaById(){
-        Optional<Subcategoria> subcategoriaOptional = subcategoriaRepository.findById(1L);
+        Optional<Subcategoria> subcategoriaOptional = subcategoriaRepository.findById(ID_SUBCATEGORIA);
         assertThat(subcategoriaOptional).isPresent();
     }
     @Test
     @DataSet(value = "datasets/categorias.yml", cleanBefore = true, cleanAfter = true)
     public void shouldCreateSubcategoria(){
-        Categoria categoriaOptional = categoriaRepository.findById(1L).orElseThrow();
+        Categoria categoriaOptional = categoriaRepository.findById(ID_CATEGORIA).orElseThrow();
 
         Subcategoria subcategoria = Subcategoria.builder()
                 .nombre("Nueva Subcategoria")
@@ -48,7 +52,7 @@ public class SubcategoriaRepositoryTest {
     @DataSet(value = {"datasets/subcategorias.yml", "datasets/categorias.yml"},
             cleanBefore = true, cleanAfter = true)
     public void shouldUpdateSubcategoria(){
-        Subcategoria subcategoria = subcategoriaRepository.findById(1L).orElseThrow();
+        Subcategoria subcategoria = subcategoriaRepository.findById(ID_SUBCATEGORIA).orElseThrow();
         subcategoria.setNombre("Nombre actualizado");
 
         Subcategoria updateSubcategoria = subcategoriaRepository.save(subcategoria);
@@ -59,7 +63,7 @@ public class SubcategoriaRepositoryTest {
             cleanBefore = true, cleanAfter = true)
     public void shouldDeleteSubcategoria(){
         subcategoriaRepository.deleteById(1L);
-        Subcategoria deletedSubcategoria = subcategoriaRepository.findById(1L).orElse(null);
+        Subcategoria deletedSubcategoria = subcategoriaRepository.findById(ID_SUBCATEGORIA).orElse(null);
 
         assertNull(deletedSubcategoria);
     }

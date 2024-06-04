@@ -11,6 +11,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -29,17 +30,21 @@ public class ProductoRepositoryTest {
     @Autowired
     private SubcategoriaRepository subcategoriaRepository;
 
+    private static final Long ID_PRODUCTO = 1L;
+
     @Test
     @DataSet({"datasets/categorias.yml", "datasets/subcategorias.yml"})
     void shouldFindProductsByPartialNameIgnoreCase() {
         Producto p = Producto.builder()
                 .nombre("Ibérica")
                 .precio(145)
-                .descripcion(" Cesta muy \"nuestra\". Con sobre de jamón de bellota 100%, en tapas, bote de aceitunas rellenas, bolsa de patatas fritas con aceite de oliva, picos de pan, bote de cóctel de frutos secos, botella de aceite de oliva Vigen Extra con D.O. Jaén, tomates cherry en ramo y burrito de esparto artesanal.\n" +
-                        "\n" +
-                        "Flores silvestres que durarán mucho tiempo porque secan perfectas.\n" +
-                        "\n" +
-                        "Las imágenes son orientativas el atrezo floral puede variar en colores o variedad.")
+                .descripcion("""
+                         Cesta muy "nuestra". Con sobre de jamón de bellota 100%, en tapas, bote de aceitunas rellenas,
+                         bolsa de patatas fritas con aceite de oliva, picos de pan, bote de cóctel de frutos secos,
+                         botella de aceite de oliva Vigen Extra con D.O. Jaén, tomates cherry en ramo y burrito de
+                         esparto artesanal. Flores silvestres que durarán mucho tiempo porque secan perfectas.
+
+                        Las imágenes son orientativas el atrezo floral puede variar en colores o variedad.""")
                 .foto("http://localhost:9000/files/cesta1.png")
                 .categoria(categoriaRepository.findByNombre("cestas").orElse(null))
                 .subcategoria(subcategoriaRepository.findByNombre("Navidad").orElse(null))
@@ -60,9 +65,9 @@ public class ProductoRepositoryTest {
         Producto producto = Producto.builder()
                 .nombre("Primavera")
                 .precio(87.5)
-                .descripcion("Fresón, nísperos, albaricoques, uvas, naranja, ciruelas, nectarina, manzana, pera, plátanos, clementina,? Una selección de frutas de temporada.\n" +
-                        "\n" +
-                        "En un capazo de palma.")
+                .descripcion("""
+                        Fresón, nísperos, albaricoques, uvas, naranja, ciruelas, nectarina, manzana, pera, \
+                        plátanos, clementina,? Una selección de frutas de temporada. En un capazo de palma.""")
                 .foto("http://localhost:9000/files/cesta3.jpg")
                 .categoria(cestas)
                 .subcategoria(subcategoriaRepository.findByNombre("Navidad").orElse(null))

@@ -26,13 +26,15 @@ public class TarjetaRepositoryTest {
     @Autowired
     private PedidoRepository pedidoRepository;
 
+    private static final Long ID_TARJETA = 1L;
+
     @Test
     @DataSet(value = {"datasets/tarjetas.yml", "datasets/pedidos.yml",
             "datasets/usuarios.yml", "datasets/perfiles.yml",
     }
             , cleanBefore = true, cleanAfter = true)
     public void shouldFindTarjetaById(){
-        Optional<Tarjeta> direccionOptional = tarjetaRepository.findById(1L);
+        Optional<Tarjeta> direccionOptional = tarjetaRepository.findById(ID_TARJETA);
         assertThat(direccionOptional).isPresent();
     }
     @Test
@@ -57,7 +59,7 @@ public class TarjetaRepositoryTest {
     }
             , cleanBefore = true, cleanAfter = true)
     public void shouldUpdateTarjeta(){
-        Tarjeta tarjeta = tarjetaRepository.findById(1L).orElseThrow();
+        Tarjeta tarjeta = tarjetaRepository.findById(ID_TARJETA).orElseThrow();
         tarjeta.setFechCaducidad(YearMonth.now().minusYears(1));
 
         Tarjeta updateTarjete = tarjetaRepository.save(tarjeta);
@@ -70,7 +72,7 @@ public class TarjetaRepositoryTest {
             , cleanBefore = true, cleanAfter = true)
     public void shouldDeleteTarjeta(){
         tarjetaRepository.deleteById(1L);
-        Tarjeta deletedTarjeta = tarjetaRepository.findById(1L).orElse(null);
+        Tarjeta deletedTarjeta = tarjetaRepository.findById(ID_TARJETA).orElse(null);
 
         assertNull(deletedTarjeta);
     }

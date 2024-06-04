@@ -35,7 +35,7 @@ iframe{
 }
 .dropdown-menu {
     min-width: auto;
-    padding: 4px 0;
+    padding: 4px 2px;
 }
 
 #input-buscador, #listaBuscadorNav, #titulo-pequeño{

@@ -3,6 +3,7 @@ package com.luislr.zerif.repositorios;
 import com.github.database.rider.core.api.dataset.DataSet;
 import com.github.database.rider.spring.api.DBRider;
 import com.luislr.zerif.entidades.Categoria;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,13 +20,15 @@ import static org.junit.jupiter.api.Assertions.*;
 @DBRider
 public class CategoriaRepositoryTest {
 
+    private static final Long ID_CATEGORIA = 1L;
+
     @Autowired
     private CategoriaRepository categoriaRepository;
 
     @Test
     @DataSet(value = "datasets/categorias.yml", cleanBefore = true, cleanAfter = true)
     public void shouldFindCategoriaById(){
-        Optional<Categoria> categoriaOptional = categoriaRepository.findById(1L);
+        Optional<Categoria> categoriaOptional = categoriaRepository.findById(ID_CATEGORIA);
         assertThat(categoriaOptional).isPresent();
     }
     @Test
@@ -39,7 +42,7 @@ public class CategoriaRepositoryTest {
     @Test
     @DataSet(value = "datasets/categorias.yml", cleanBefore = true, cleanAfter = true)
     public void shouldUpdateCategoria(){
-        Categoria categoria = categoriaRepository.findById(1L).orElseThrow();
+        Categoria categoria = categoriaRepository.findById(ID_CATEGORIA).orElseThrow(() -> new EntityNotFoundException("Categoria no encontrada con el ID 1L"));
         categoria.setNombre("Nombre actualizado");
 
         Categoria updateCategoria = categoriaRepository.save(categoria);
@@ -49,7 +52,7 @@ public class CategoriaRepositoryTest {
     @DataSet(value = "datasets/categorias.yml", cleanBefore = true, cleanAfter = true)
     public void shouldDeleteCategoria(){
         categoriaRepository.deleteById(1L);
-        Categoria deleteedCategoria = categoriaRepository.findById(1L).orElse(null);
+        Categoria deleteedCategoria = categoriaRepository.findById(ID_CATEGORIA).orElseThrow(() -> new EntityNotFoundException("Categoria no encontrada con el ID 1L"));
 
         assertNull(deleteedCategoria);
     }

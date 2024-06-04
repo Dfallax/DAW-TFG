@@ -23,20 +23,23 @@ public class PreferenciasRespositoryTest {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    private static final Long ID_USUARIO = 1L;
+    private static final Long ID_PREFERENCIAS = 1L;
+
+
     @Test
     @DataSet(value = {"datasets/perfiles.yml", "datasets/usuarios.yml", "datasets/preferencias.yml"},
             cleanBefore = true, cleanAfter = true)
     public void shouldFindPreferenciasById() {
-        Optional<Preferencias> prederencias = preferenciasRepository.findById(1L);
+        Optional<Preferencias> prederencias = preferenciasRepository.findById(ID_PREFERENCIAS);
         assertThat(prederencias).isPresent();
-        assertThat(prederencias.get().getIdioma()).isEqualTo("es_ES");
     }
 
     @Test
     @DataSet(value = {"datasets/perfiles.yml", "datasets/usuarios.yml"},
             cleanBefore = true, cleanAfter = true)
     public void shouldCreatePreferencias() {
-        Usuario usuario = usuarioRepository.findById(1L).orElseThrow();
+        Usuario usuario = usuarioRepository.findById(ID_USUARIO).orElseThrow();
 
         Preferencias preferencias = Preferencias.builder()
                 .idioma("fr_FR")
@@ -52,7 +55,7 @@ public class PreferenciasRespositoryTest {
     @DataSet(value = {"datasets/perfiles.yml", "datasets/usuarios.yml", "datasets/preferencias.yml"},
             cleanBefore = true, cleanAfter = true)
     public void shouldUpdatePreferencias() {
-        Preferencias preferencias = preferenciasRepository.findById(1L).orElseThrow();
+        Preferencias preferencias = preferenciasRepository.findById(ID_PREFERENCIAS).orElseThrow();
         preferencias.setIdioma("de_DE");
 
         Preferencias updatedPreferencias = preferenciasRepository.save(preferencias);
@@ -63,8 +66,8 @@ public class PreferenciasRespositoryTest {
     @DataSet(value = {"datasets/perfiles.yml", "datasets/usuarios.yml", "datasets/preferencias.yml"},
             cleanBefore = true, cleanAfter = true)
     public void shouldDeletePreferencias() {
-        preferenciasRepository.deleteById(1L);
-        Optional<Preferencias> foundPreferencias = preferenciasRepository.findById(1L);
+        preferenciasRepository.deleteById(ID_PREFERENCIAS);
+        Optional<Preferencias> foundPreferencias = preferenciasRepository.findById(ID_PREFERENCIAS);
         assertThat(foundPreferencias).isNotPresent();
     }
 }

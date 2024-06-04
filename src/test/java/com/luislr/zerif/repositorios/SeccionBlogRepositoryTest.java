@@ -25,17 +25,21 @@ public class SeccionBlogRepositoryTest {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    private static final Long ID_USUARIO = 1L;
+    private static final Long ID_SECCION_BLOG = 1L;
+
+
     @Test
     @DataSet({"seccionBlog.yml", "usuarios.yml", "datasets/perfiles.yml"})
     public void shouldFindSeccionBlogById() {
-        Optional<SeccionBlog> seccionBlogOptional = seccionBlogRepository.findById(1L);
+        Optional<SeccionBlog> seccionBlogOptional = seccionBlogRepository.findById(ID_SECCION_BLOG);
         assertThat(seccionBlogOptional).isPresent();
     }
 
     @Test
     @DataSet({"usuarios.yml", "datasets/perfiles.yml"})
     public void shouldCreateSeccionBlog() {
-        Usuario usuario = usuarioRepository.getReferenceById(3L);
+        Usuario usuario = usuarioRepository.getReferenceById(ID_USUARIO);
         SeccionBlog seccionBlog = SeccionBlog.builder()
                 .titulo("Nuevo título")
                 .descripcion("Nueva descripción")
@@ -51,7 +55,7 @@ public class SeccionBlogRepositoryTest {
     @Test
     @DataSet({"seccionBlog.yml", "usuarios.yml", "datasets/perfiles.yml"})
     public void shouldUpdateSeccionBlog() {
-        SeccionBlog seccionBlog = seccionBlogRepository.findById(1L).orElseThrow();
+        SeccionBlog seccionBlog = seccionBlogRepository.findById(ID_SECCION_BLOG).orElseThrow();
         seccionBlog.setTitulo("Nuevo título actualizado");
 
         SeccionBlog updatedSeccionBlog = seccionBlogRepository.save(seccionBlog);
@@ -61,7 +65,7 @@ public class SeccionBlogRepositoryTest {
     @Test
     public void shouldDeleteSeccionBlog() {
         seccionBlogRepository.deleteById(1L);
-        Optional<SeccionBlog> foundSeccionBlog = seccionBlogRepository.findById(1L);
+        Optional<SeccionBlog> foundSeccionBlog = seccionBlogRepository.findById(ID_SECCION_BLOG);
         assertThat(foundSeccionBlog).isNotPresent();
     }
 }

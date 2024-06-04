@@ -12,6 +12,7 @@ h3{
     overflow-x: auto;
     white-space: nowrap;
     width: 100%;
+    margin-bottom: 10pt
 }
 
 #scroll-content {
@@ -20,6 +21,5 @@ h3{
 .item-producto {
     display: inline-block;
     width: 260px;
-    height: 380px;
     margin-right: 20px;
 }

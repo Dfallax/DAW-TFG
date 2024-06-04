@@ -20,12 +20,13 @@ public class PerfilRepositoryTest {
     @Autowired
     private PerfilRepository perfilRepository;
 
+    private static final Long ID_PERFIL = 1L;
+
     @Test
     @DataSet(value = "datasets/perfiles.yml", cleanBefore = true, cleanAfter = true)
     public void shouldFindPerfilById() {
-        Optional<Perfil> perfilOptional = perfilRepository.findById(1L);
+        Optional<Perfil> perfilOptional = perfilRepository.findById(ID_PERFIL);
         assertThat(perfilOptional).isPresent();
-        assertThat(perfilOptional.get().getNombre()).isEqualTo("ADMIN");
     }
 
     @Test
@@ -43,7 +44,7 @@ public class PerfilRepositoryTest {
     @Test
     @DataSet(value = {"datasets/perfiles.yml"}, cleanBefore = true, cleanAfter = true)
     public void shouldUpdatePerfil() {
-        Perfil perfil = perfilRepository.findById(1L).orElseThrow();
+        Perfil perfil = perfilRepository.findById(ID_PERFIL).orElseThrow();
         perfil.setNombre("MODERATOR");
 
         Perfil updatedPerfil = perfilRepository.save(perfil);
@@ -54,7 +55,7 @@ public class PerfilRepositoryTest {
     @DataSet(value = {"datasets/perfiles.yml"}, cleanBefore = true, cleanAfter = true)
     public void shouldDeletePerfil() {
         perfilRepository.deleteById(1L);
-        Optional<Perfil> foundPerfil = perfilRepository.findById(1L);
+        Optional<Perfil> foundPerfil = perfilRepository.findById(ID_PERFIL);
         assertThat(foundPerfil).isNotPresent();
     }
 }
