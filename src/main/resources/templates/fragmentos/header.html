@@ -109,14 +109,14 @@
                         </a>
                         <ul class="dropdown-menu dropdown-menu-right border border-black">
                             <li class="dropdown-item d-flex align-items-center justify-content-start">
-                                <span><img class="img-espana" th:src="@{/espana.png}"></span>
+                                <span><img class="img-espana" th:src="@{/espana.png}" alt=""></span>
                                 <span>
                                     <a class="nav-link" th:href="@{''(lang=es_ES)}" th:text="#{header.idioma_es}">
                                         Español</a>
                                 </span>
                             </li>
                             <li class="dropdown-item d-flex align-items-center justify-content-start">
-                                <span><img class="img-espana" th:src="@{/reino-unido.png}"></span>
+                                <span><img class="img-espana" th:src="@{/reino-unido.png}" alt=""></span>
                                 <span>
                                     <a class="nav-link" th:href="@{''(lang=en_EN)}" th:text="#{header.idioma_en}">
                                         Inglés</a>
@@ -158,7 +158,7 @@
                         </ul>
                     </li>
                 </ul>
-                <form th:action="@{/usuario/logout}" method="post" id="logoutForm"></form>
+                <form sec:authorize="isAuthenticated()" th:action="@{/usuario/logout}" method="post" id="logoutForm"></form>
             </div>
 
         </div>
