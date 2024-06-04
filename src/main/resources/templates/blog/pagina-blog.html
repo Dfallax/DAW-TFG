@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="~{fragmentos/head::head(~{::title}, ~{::link})}">
-    <title>Blog</title>
+    <title th:text="#{titulo.blog}">Blog</title>
     <link rel="stylesheet" th:href="@{/css/pagina-blog.css}">
 </head>
 <body class="mx-3">
@@ -11,13 +11,13 @@
     <!--Migas de pan-->
     <nav aria-label="breadcrumb" class="my-5 ms-3">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item active" aria-current="page"><a th:href="@{/index}">Inicio</a></li>
-            <li class="breadcrumb-item active" aria-current="page"><a th:href="@{/blog/pagina}">Blog</a></li>
+            <li class="breadcrumb-item active" aria-current="page"><a th:href="@{/index}" th:text="#{breadcrumb.home}">Inicio</a></li>
+            <li class="breadcrumb-item active" aria-current="page"><a th:href="@{/blog/pagina}" th:text="#{breadcrumb.blog}">Blog</a></li>
         </ol>
     </nav>
     <!--El título-->
     <div>
-        <h2 id="tituloBlog">Blog</h2>
+        <h2 id="tituloBlog" th:text="#{titulo.blog}">Blog</h2>
     </div>
     <!--Secciones Blog-->
     <div class="row my-0 mx-auto">
@@ -25,7 +25,7 @@
         <div class="col-12">
             <div class="d-flex justify-content-center">
                 <form id="form-buscadorBlog" method="post" action="#">
-                    <input type="text" class="form-control" id="buscarPorTitulo" placeholder="Buscar por título" name="nombre"/>
+                    <input type="text" class="form-control" id="buscarPorTitulo" th:placeholder="#{placeholder.buscar_por_titulo}" name="nombre"/>
                 </form>
                 <div id="iconoBuscadorBlog" class="nav-item m-1">
                     <a class="nav-link" href="#">

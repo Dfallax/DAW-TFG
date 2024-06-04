@@ -2,7 +2,7 @@
 <html lang="es" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="~{fragmentos/head::head(~{::title}, ~{::link})}">
-    <title>Inicio</title>
+    <title th:text="#{breadcrumb.home}">Inicio</title>
     <link rel="stylesheet" th:href="@{css/index.css}">
 </head>
 <body class="mx-3">

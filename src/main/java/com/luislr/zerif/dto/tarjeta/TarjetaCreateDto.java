@@ -11,20 +11,20 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class TarjetaCreateDto {
-    @NotBlank(message = "El número de tarjeta es obligatorio.")
-    @Size(min = 16, max = 16, message = "El número de tarjeta debe tener 16 dígitos.")
-    private String numTarjeta = "1234567891234567";
+    @NotBlank(message = "{tarjeta.error.numero.obligatorio}")
+    @Size(min = 16, max = 16, message = "{tarjeta.error.numero.size}")
+    private String numTarjeta;
 
-    @NotBlank(message = "El CV es obligatorio.")
-    @Size(min = 3, max = 4, message = "El CV debe tener entre 3 y 4 dígitos.")
-    private String cv = "1234";
+    @NotBlank(message = "{tarjeta.error.cv.obligatorio}")
+    @Size(min = 3, max = 4, message = "{tarjeta.error.cv.size}")
+    private String cv;
 
-    @NotNull(message = "El mes de caducidad es obligatorio.")
-    @Min(value = 1, message = "El mes debe ser un número entre 1 y 12.")
-    @Max(value = 12, message = "El mes debe ser un número entre 1 y 12.")
-    private Integer mesCaducidad = 12;
+    @NotNull(message = "{tarjeta.error.mesCaducidad.obligatorio}")
+    @Min(value = 1, message = "{tarjeta.error.mesCaducidad.min}")
+    @Max(value = 12, message = "{tarjeta.error.mesCaducidad.max}")
+    private Integer mesCaducidad;
 
-    @NotNull(message = "El año de caducidad es obligatorio.")
-    @Pattern(regexp = "\\d{2}", message = "El año debe ser los dos últimos dígitos.")
-    private String yearCaducidad= "24";
+    @NotNull(message = "{tarjeta.error.yearCaducidad.obligatorio}")
+    @Pattern(regexp = "\\d{2}", message = "{tarjeta.error.yearCaducidad.pattern}")
+    private String yearCaducidad;
 }

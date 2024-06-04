@@ -14,24 +14,24 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class DireccionUpdateDto {
-    @NotNull(message = "El ID es obligatorio")
+    @NotNull(message = "{direccion.error.id.obligatorio}")
     private Long id;
 
-    @NotBlank(message = "La calle es obligatoria")
+    @NotBlank(message = "{direccion.error.calle.obligatoria}")
     private String calle;
 
-    @NotNull(message = "El número es obligatorio")
-    @Min(value = 1, message = "El número debe ser mayor que 0")
+    @NotNull(message = "{direccion.error.numero.obligatorio}")
+    @Min(value = 1, message = "{direccion.error.numero.min}")
     private Integer numero;
 
-    @NotNull(message = "El piso es obligatorio")
-    @Min(value = 0, message = "El piso no puede ser negativo")
+    @NotNull(message = "{direccion.error.piso.obligatorio}")
+    @Min(value = 0, message = "{direccion.error.piso.min}")
     private Integer piso;
 
-    @NotBlank(message = "La puerta es obligatoria")
-    @Pattern(regexp = "^[A-Za-z]$", message = "La puerta debe ser un solo carácter alfabético")
+    @NotBlank(message = "{direccion.error.puerta.obligatoria}")
+    @Pattern(regexp = "^[A-Za-z]$", message = "{direccion.error.puerta.pattern}")
     private String puerta;
 
-    @NotBlank(message = "La ciudad es obligatoria")
+    @NotBlank(message = "{direccion.error.ciudad.obligatoria}")
     private String ciudad;
 }

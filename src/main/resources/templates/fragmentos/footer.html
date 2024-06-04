@@ -2,39 +2,39 @@
     <div class="row">
         <!-- Horario de Atención -->
         <section class="col-lg-4 col-md-12 text-white text-center px-0 my-5">
-            <h5>Horario de Atención</h5>
+            <h5 th:text="#{footer.horario_atencion}">Horario de Atención</h5>
             <div class="my-3">
-                <p>Lunes a Viernes: 9:00 AM - 8:00 PM</p>
-                <p>Sábado: 10:00 AM - 6:00 PM</p>
-                <p>Domingo: Cerrado</p>
+                <p th:text="#{footer.horario.lunes_viernes}">Lunes a Viernes: 9:00 AM - 8:00 PM</p>
+                <p th:text="#{footer.horario.sabado}">Sábado: 10:00 AM - 6:00 PM</p>
+                <p th:text="#{footer.horario.domingo}">Domingo: Cerrado</p>
             </div>
             <div class="mt-5">
-                <h5>¿Dónde estamos?</h5>
+                <h5 th:text="#{footer.donde_estamos}">¿Dónde estamos?</h5>
                 <div class="my-3">
-                    <a th:href="@{/ubicaciones}" class="text-white">Ver nuestras ubicaciones en Google Maps</a>
+                    <a th:href="@{/ubicaciones}" th:text="#{footer.ver_ubicaciones}" class="text-white">Ver nuestras ubicaciones en Google Maps</a>
                 </div>
             </div>
         </section>
         <!-- Contáctanos -->
         <section class="col-lg-4 col-md-12 text-white text-center px-0 my-5">
-            <h5>Contáctanos</h5>
+            <h5 th:text="#{footer.contactanos}">Contáctanos</h5>
             <div>
-                <p>Teléfonos:</p>
-                <p>+34 912 345 678</p>
-                <p>+34 987 654 321</p>
+                <p th:text="#{footer.telefonos}">Teléfonos:</p>
+                <p th:text="#{footer.telefono1}">+34 912 345 678</p>
+                <p th:text="#{footer.telefono2}">+34 987 654 321</p>
             </div>
             <div>
-                <p>Correos electrónicos:</p>
-                <p>atencioncliente@empresa.com</p>
-                <p>soporte@empresa.com</p>
+                <p th:text="#{footer.correos}">Correos electrónicos:</p>
+                <p th:text="#{footer.correo1}">atencioncliente@empresa.com</p>
+                <p th:text="#{footer.correo2}">soporte@zerif.com</p>
             </div>
             <div class="my-3">
-                <a th:href="@{/blog/pagina}" class="text-white">Visita nuestro blog</a>
+                <a th:href="@{/blog/pagina}" th:text="#{footer.visita_blog}" class="text-white">Visita nuestro blog</a>
             </div>
         </section>
         <!-- Redes sociales -->
         <section class="col-lg-4 col-md-12 text-white text-center px-0 my-5">
-            <h5>Redes sociales</h5>
+            <h5 th:text="#{footer.redes_sociales}">Redes sociales</h5>
             <div class="d-flex flex-row justify-content-around my-4">
                 <a th:href="@{/}" style="color:#1DA1F2;"> <!-- Twitter -->
                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-twitter" viewBox="0 0 16 16">

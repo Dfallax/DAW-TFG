@@ -35,7 +35,7 @@ iframe{
 }
 .dropdown-menu {
     min-width: auto;
-    padding: 4px 2px;
+    padding: 4px;
 }
 
 #input-buscador, #listaBuscadorNav, #titulo-pequeño{
@@ -59,7 +59,9 @@ iframe{
     width: auto;
     max-width: 350px;
 }
-
+.img-espana{
+    max-width: 20px
+}
 /*Estilos cuando el ancho es inferior a 992px*/
 @media only screen and (max-width: 993px) {
     #titulo-grande{
