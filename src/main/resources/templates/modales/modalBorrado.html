@@ -6,11 +6,12 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
             </div>
             <div class="modal-body">
-                <p th:text="${delete_message}">¿Confirma el borrado de ....?</p>
+                <p th:text="${delete_message}">¿Confirma el borrado de ...?</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <a href="#" th:href="@{${delete_url}}" class="btn btn-primary">Aceptar</a>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" th:text="#{modal.cancel}">
+                    Cancelar</button>
+                <a href="#" th:href="@{${delete_url}}" th:text="#{modal.accept}" class="btn btn-primary">Aceptar</a>
             </div>
         </div>
     </div>

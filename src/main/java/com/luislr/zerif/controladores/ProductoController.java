@@ -118,31 +118,7 @@ public class ProductoController {
                 }
             }
 
-            ProductoUtilidades.calcularMediaValoracion(listaProducto);
-
-            switch (orden) {
-                case 1:// Orden alfabetico
-                    listaProducto.sort(Comparator.comparing(Producto::getNombre));
-                    break;
-                case 2:// Orden alfabetico inverso
-                    listaProducto.sort(Comparator.comparing(Producto::getNombre).reversed());
-                    break;
-                case 3://Orden por mayor precio
-                    listaProducto.sort(Comparator.comparingDouble(Producto::getPrecio).reversed());
-                    break;
-                case 4://Orden por menor precio
-                    listaProducto.sort(Comparator.comparingDouble(Producto::getPrecio));
-                    break;
-                case 5://Ordenar por mayor valoración
-                    listaProducto.sort(Comparator.comparingDouble(Producto::getMediaValoraciones).reversed());
-                    break;
-                case 6: // Orden por menor valoración
-                    listaProducto.sort(Comparator.comparingDouble(Producto::getMediaValoraciones));
-                    break;
-                default:
-                    listaProducto = productoService.findByCategoriaAndSubcategoria(tipoProducto.get(), subtipoProducto.get());
-                    break;
-            }
+            ProductoUtilidades.calcularYOrdenarProductos(listaProducto, orden);
 
             model.addAttribute("listaProducto", listaProducto);
             return "fragmentos/span-producto::span-producto";
@@ -173,31 +149,8 @@ public class ProductoController {
                 }
             }
 
-            ProductoUtilidades.calcularMediaValoracion(listaProducto);
+            ProductoUtilidades.calcularYOrdenarProductos(listaProducto, orden);
 
-            switch (orden) {
-                case 1:// Orden alfabetico
-                    listaProducto.sort(Comparator.comparing(Producto::getNombre));
-                    break;
-                case 2:// Orden alfabetico inverso
-                    listaProducto.sort(Comparator.comparing(Producto::getNombre).reversed());
-                    break;
-                case 3://Orden por mayor precio
-                    listaProducto.sort(Comparator.comparingDouble(Producto::getPrecio).reversed());
-                    break;
-                case 4://Orden por menor precio
-                    listaProducto.sort(Comparator.comparingDouble(Producto::getPrecio));
-                    break;
-                case 5://Ordenar por mayor valoración
-                    listaProducto.sort(Comparator.comparingDouble(Producto::getMediaValoraciones).reversed());
-                    break;
-                case 6: // Orden por menor valoración
-                    listaProducto.sort(Comparator.comparingDouble(Producto::getMediaValoraciones));
-                    break;
-                default:
-                    //listaProducto = productoService.findByCategoriaAndSubcategoria(tipoProducto.get(), subtipoProducto.get());
-                    break;
-            }
             // Obtener precios mínimo y máximo
             double precioMin = listaProducto.stream().mapToDouble(Producto::getPrecio).min().orElse(0.0);
             double precioMax = listaProducto.stream().mapToDouble(Producto::getPrecio).max().orElse(1000.0);
@@ -238,31 +191,7 @@ public class ProductoController {
                     .filter(p -> p.getPrecio() >= precioMin && p.getPrecio() <= precioMax)
                     .collect(Collectors.toList());
 
-            ProductoUtilidades.calcularMediaValoracion(listaProducto);
-
-            // Ordenar la lista de productos según el orden seleccionado
-            switch (orden) {
-                case 1: // Orden alfabético
-                    listaProducto.sort(Comparator.comparing(Producto::getNombre));
-                    break;
-                case 2: // Orden alfabético inverso
-                    listaProducto.sort(Comparator.comparing(Producto::getNombre).reversed());
-                    break;
-                case 3: // Orden por mayor precio
-                    listaProducto.sort(Comparator.comparingDouble(Producto::getPrecio).reversed());
-                    break;
-                case 4: // Orden por menor precio
-                    listaProducto.sort(Comparator.comparingDouble(Producto::getPrecio));
-                    break;
-                case 5: // Ordenar por mayor valoración
-                    listaProducto.sort(Comparator.comparingDouble(Producto::getMediaValoraciones).reversed());
-                    break;
-                case 6: // Orden por menor valoración
-                    listaProducto.sort(Comparator.comparingDouble(Producto::getMediaValoraciones));
-                    break;
-                default:
-                    break;
-            }
+           ProductoUtilidades.calcularYOrdenarProductos(listaProducto, orden);
 
             model.addAttribute("listaProducto", listaProducto);
             return "fragmentos/span-producto::span-producto";

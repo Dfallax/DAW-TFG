@@ -2,53 +2,37 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>Ordenar por</h2>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                <h2 th:text="#{sort.by}">Ordenar por</h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" th:aria-label="#{modal.close}"></button>
             </div>
             <div class="modal-body">
                 <div class="form-check">
                     <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                    <label class="form-check-label" for="flexRadioDefault1">
-                        Alfabeticamente A-Z
-                    </label>
+                    <label class="form-check-label" for="flexRadioDefault1" th:text="#{sort.alphabetically.az}">Alfabeticamente A-Z</label>
                 </div>
                 <div class="form-check">
                     <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
-                    <label class="form-check-label" for="flexRadioDefault2">
-                        Alfabeticamente Z-A
-                    </label>
+                    <label class="form-check-label" for="flexRadioDefault2" th:text="#{sort.alphabetically.za}">Alfabeticamente Z-A</label>
                 </div>
                 <div class="form-check">
                     <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3">
-                    <label class="form-check-label" for="flexRadioDefault3">
-                        Mayor Precio
-                    </label>
+                    <label class="form-check-label" for="flexRadioDefault3" th:text="#{sort.price.highest}">Mayor Precio</label>
                 </div>
                 <div class="form-check">
                     <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault4">
-                    <label class="form-check-label" for="flexRadioDefault4">
-                        Menor Precio
-                    </label>
+                    <label class="form-check-label" for="flexRadioDefault4" th:text="#{sort.price.lowest}">Menor Precio</label>
                 </div>
-                <div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault5">
-                        <label class="form-check-label" for="flexRadioDefault5">
-                            Mayor Valoración
-                        </label>
-                    </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault5">
+                    <label class="form-check-label" for="flexRadioDefault5" th:text="#{sort.rating.highest}">Mayor Valoración</label>
                 </div>
                 <div class="form-check">
                     <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault6">
-                    <label class="form-check-label" for="flexRadioDefault6">
-                        Menor Valoración
-                    </label>
+                    <label class="form-check-label" for="flexRadioDefault6" th:text="#{sort.rating.lowest}">Menor Valoración</label>
                 </div>
             </div>
             <div class="modal-footer">
-                <button id="enviarOrdenar" type="button" class=" mx-auto"  data-bs-dismiss="modal" aria-label="Enviar">
-                    Enviar
-                </button>
+                <button id="enviarOrdenar" type="button" class="mx-auto" data-bs-dismiss="modal" th:aria-label="#{sort.submit.ariaLabel}" th:text="#{sort.submit}">Enviar</button>
             </div>
         </div>
     </div>

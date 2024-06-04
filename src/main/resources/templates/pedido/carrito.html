@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="~{fragmentos/head::head(~{::title}, ~{::link})}">
-  <title>Carrito de Compras</title>
+  <title th:text="#{cart.title}">Carrito de Compras</title>
   <link rel="stylesheet" th:href="@{/css/carrito.css}">
 </head>
 <body class="mx-3">
@@ -9,17 +9,17 @@
 
 <main class="mx-auto">
   <div>
-    <h2 id="tituloCarrito">Carrito de Compras</h2>
+    <h2 id="tituloCarrito" th:text="#{cart.title}">Carrito de Compras</h2>
   </div>
   <div th:if="${carrito.articulos.size() == 0}">
-    <p>Tu carrito está vacío.</p>
+    <p th:text="#{cart.empty}">Tu carrito está vacío.</p>
   </div>
   <div th:if="${carrito.articulos.size() > 0}" class="row  my-3 mx-auto">
     <!--Lista-->
     <div id="scroll" class="col-lg-7">
       <div id="scroll-content">
-        <div id="contenedorArticulos" >
-          <div th:replace="~{fragmentos/span-carrito::span-carrito}" ></div>
+        <div id="contenedorArticulos">
+          <div th:replace="~{fragmentos/span-carrito::span-carrito}"></div>
         </div>
       </div>
     </div>
@@ -27,11 +27,11 @@
     <!--Card para el pago-->
     <div class="card col-lg-3 h-25 mt-4">
       <div class="card-body">
-        <h3 class="text-right"><strong>Total del pedido:</strong></h3>
+        <h3 class="text-right"><strong th:text="#{cart.total}">Total del pedido:</strong></h3>
         <h3 id="precioPedido" class="mt-3" th:text="${#numbers.formatDecimal(carrito.getTotal(), 2, 2)}+'€'">0.00</h3>
         <div class="mt-5">
           <a th:href="@{/pedido/carrito/compra}" class="btn btn-success">
-            <h3>Proceder al Pago</h3>
+            <h3 th:text="#{cart.proceedToPayment}">Proceder al Pago</h3>
           </a>
         </div>
       </div>

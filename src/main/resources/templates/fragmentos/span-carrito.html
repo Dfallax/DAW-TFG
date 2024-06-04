@@ -1,33 +1,36 @@
-
-<div  th:fragment="span-carrito" th:each="articulo : ${carrito.articulos}" class="card span-articulo mb-4">
-    <div class="card-header" >
+<div th:fragment="span-carrito" th:each="articulo : ${carrito.articulos}" class="card span-articulo mb-4">
+    <div class="card-header">
         <h3 class="productoNombre" th:text="${articulo.producto.nombre}"></h3>
     </div>
     <div class="card-img">
-            <img th:src="${articulo.producto.foto}" alt="Foto producto" class="imagen-producto">
+        <img th:src="${articulo.producto.foto}" alt="Foto producto" class="imagen-producto">
     </div>
     <div class="card-body d-flex flex-column">
         <div class="d-flex align-items-center justify-content-start">
-            <div class="me-2">Precio por unidad:</div>
+            <div class="me-2" th:text="#{carrito.precioPorUnidad}">Precio por unidad:</div>
             <div th:text="${#numbers.formatDecimal(articulo.precioUnidad , 2, 2)}"></div>
-            <div>€</div>
+            <div th:text="#{carrito.moneda}">€</div>
         </div>
         <div class="d-flex align-items-center justify-content-start">
-            <div class="me-2">Cantidad:</div>
+            <div class="me-2" th:text="#{carrito.cantidad}">Cantidad:</div>
             <div>
-                <input type="number" class="cantidad" th:value="${articulo.cantidad}" min="1" th:attr="data-articulo-id=${articulo.id.idPedido} + '-' + ${articulo.id.idProducto}" onchange="cambioInput(this)">
+                <input type="number" class="cantidad" th:value="${articulo.cantidad}" min="1"
+                       th:attr="data-articulo-id=${articulo.id.idPedido} + '-' + ${articulo.id.idProducto}"
+                       onchange="cambioInput(this)">
             </div>
         </div>
         <div class="d-flex align-items-center justify-content-start">
-            <div class="me-2">Total:</div>
+            <div class="me-2" th:text="#{carrito.total}">Total:</div>
             <div>
-                <div class="precioArticulo" th:text="${#numbers.formatDecimal(articulo.precioUnidad * articulo.cantidad, 2, 2)}">0.00</div>
+                <div class="precioArticulo"
+                     th:text="${#numbers.formatDecimal(articulo.precioUnidad * articulo.cantidad, 2, 2)}">0.00</div>
             </div>
-            <div>€</div>
+            <div th:text="#{carrito.moneda}">€</div>
         </div>
     </div>
     <div class="card-footer">
-        <button class="btn btn-danger botonEliminarArticulo" th:attr="data-articulo-id=${articulo.id.idPedido} + '-' + ${articulo.id.idProducto}")>Eliminar</button>
+        <button class="btn btn-danger botonEliminarArticulo"
+                th:attr="data-articulo-id=${articulo.id.idPedido} + '-' + ${articulo.id.idProducto}"
+                th:text="#{carrito.eliminar}">Eliminar</button>
     </div>
 </div>
-

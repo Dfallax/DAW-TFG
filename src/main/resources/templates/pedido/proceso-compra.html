@@ -2,7 +2,7 @@
 <html lang="es" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="~{fragmentos/head::head(~{::title}, ~{::link})}">
-    <title>Finalizar Pedido</title>
+    <title th:text="#{order.finish.title}">Finalizar Pedido</title>
     <link rel="stylesheet" th:href="@{/css/proceso-compra.css}">
 </head>
 <body class="mx-3">
@@ -16,19 +16,21 @@
             <!--Detalles del pedido-->
             <div class="accordion-item">
                 <h2 class="accordion-header" id="headingOne">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                        Detalles del Pedido
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        <span th:text="#{order.details}">Detalles del Pedido</span>
                     </button>
                 </h2>
-                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                     data-bs-parent="#accordionExample">
                     <div class="accordion-body">
                         <table class="table">
                             <thead>
                             <tr>
-                                <th>Nombre del Producto</th>
-                                <th>Precio</th>
-                                <th>Cantidad</th>
-                                <th>Precio Total</th>
+                                <th th:text="#{product.name}">Nombre del Producto</th>
+                                <th th:text="#{product.price}">Precio</th>
+                                <th th:text="#{product.quantity}">Cantidad</th>
+                                <th th:text="#{product.totalPrice}">Precio Total</th>
                             </tr>
                             </thead>
                             <tbody th:each="articulo : ${pedido.articulos}">
@@ -41,19 +43,19 @@
                             </tbody>
                             <tfoot>
                             <tr>
-                                <td>Total:</td>
+                                <td th:text="#{order.total}">Total:</td>
                                 <td>
-                                    <input type="hidden" id="idProducto" name="idProducto" th:field="*{idProducto}" th:value="*{idProducto}">
+                                    <input type="hidden" id="idProducto" name="idProducto" th:field="*{idProducto}"
+                                           th:value="*{idProducto}">
                                 </td>
                                 <td>
-                                    <input type="hidden" id="cantidad" name="cantidad" th:field="*{cantidad}" th:value="*{cantidad}">
+                                    <input type="hidden" id="cantidad" name="cantidad" th:field="*{cantidad}"
+                                           th:value="*{cantidad}">
                                 </td>
                                 <td th:text="${#numbers.formatDecimal(pedido.getTotal(), 2, 2)}+'€'"></td>
                             </tr>
                             </tfoot>
                         </table>
-                        <div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -61,48 +63,60 @@
             <!-- Sección de Dirección -->
             <div class="accordion-item">
                 <h2 class="accordion-header" id="headingTwo">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                        Dirección
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        <span th:text="#{address.title}">Dirección</span>
                     </button>
                 </h2>
-                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                     data-bs-parent="#accordionExample">
                     <div class="accordion-body">
-                        <div class="input-group  mb-3" th:classappend="${#fields.hasErrors('direccion.calle')} ? 'has-error'">
+                        <div class="input-group  mb-3"
+                             th:classappend="${#fields.hasErrors('direccion.calle')} ? 'has-error'">
                             <span class="d-flex align-items-center justify-content-start">
-                                <label for="calle" class="form-label">Calle</label>
-                                <input type="text" class="form-control" id="calle" name="direccion.calle" th:field="*{direccion.calle}">
+                                <label for="calle" class="form-label" th:text="#{address.street}">Calle</label>
+                                <input type="text" class="form-control" id="calle" name="direccion.calle"
+                                       th:field="*{direccion.calle}">
                             </span>
                             <span th:if="${#fields.hasErrors('direccion.calle')}" th:errors="*{direccion.calle}"
                                   class="help-block" id="calle-error">Errores</span>
                         </div>
-                        <div class="input-group mb-3" th:classappend="${#fields.hasErrors('direccion.numero')} ? 'has-error'">
+                        <div class="input-group mb-3"
+                             th:classappend="${#fields.hasErrors('direccion.numero')} ? 'has-error'">
                             <span class="d-flex align-items-center justify-content-start">
-                                <label for="numero" class="form-label">Número</label>
-                                <input type="number" class="form-control" id="numero" name="direccion.numero" th:field="*{direccion.numero}">
+                                <label for="numero" class="form-label" th:text="#{address.number}">Número</label>
+                                <input type="number" class="form-control" id="numero" name="direccion.numero"
+                                       th:field="*{direccion.numero}">
                             </span>
                             <span th:if="${#fields.hasErrors('direccion.numero')}" th:errors="*{direccion.numero}"
                                   class="help-block" id="numero-error">Errores</span>
                         </div>
-                        <div class="input-group mb-3" th:classappend="${#fields.hasErrors('direccion.piso')} ? 'has-error'">
+                        <div class="input-group mb-3"
+                             th:classappend="${#fields.hasErrors('direccion.piso')} ? 'has-error'">
                             <span class="d-flex align-items-center justify-content-start">
-                                <label for="piso" class="form-label">Piso</label>
-                                <input type="number" class="form-control" id="piso" name="direccion.piso" th:field="*{direccion.piso}">
+                                <label for="piso" class="form-label" th:text="#{address.floor}">Piso</label>
+                                <input type="number" class="form-control" id="piso" name="direccion.piso"
+                                       th:field="*{direccion.piso}">
                             </span>
                             <span th:if="${#fields.hasErrors('direccion.piso')}" th:errors="*{direccion.piso}"
                                   class="help-block" id="piso-error">Errores</span>
                         </div>
-                        <div class="input-group mb-3" th:classappend="${#fields.hasErrors('direccion.puerta')} ? 'has-error'">
+                        <div class="input-group mb-3"
+                             th:classappend="${#fields.hasErrors('direccion.puerta')} ? 'has-error'">
                             <span class="d-flex align-items-center justify-content-start">
-                                <label for="puerta" class="form-label">Puerta</label>
-                                <input type="text" class="form-control" id="puerta" name="direccion.puerta" th:field="*{direccion.puerta}">
+                                <label for="puerta" class="form-label" th:text="#{address.door}">Puerta</label>
+                                <input type="text" class="form-control" id="puerta" name="direccion.puerta"
+                                       th:field="*{direccion.puerta}">
                             </span>
                             <span th:if="${#fields.hasErrors('direccion.puerta')}" th:errors="*{direccion.puerta}"
                                   class="help-block" id="puerta-error">Errores</span>
                         </div>
-                        <div class="input-group mb-3" th:classappend="${#fields.hasErrors('direccion.ciudad')} ? 'has-error'">
+                        <div class="input-group mb-3"
+                             th:classappend="${#fields.hasErrors('direccion.ciudad')} ? 'has-error'">
                             <span class="d-flex align-items-center justify-content-start">
-                                <label for="ciudad" class="form-label">Ciudad</label>
-                                <input type="text" class="form-control" id="ciudad" name="direccion.ciudad" th:field="*{direccion.ciudad}">
+                                <label for="ciudad" class="form-label" th:text="#{address.city}">Ciudad</label>
+                                <input type="text" class="form-control" id="ciudad" name="direccion.ciudad"
+                                       th:field="*{direccion.ciudad}">
                             </span>
                             <span th:if="${#fields.hasErrors('direccion.ciudad')}" th:errors="*{direccion.ciudad}"
                                   class="help-block" id="ciudad-error">Errores</span>
@@ -114,37 +128,51 @@
             <!-- Sección de Método de Pago -->
             <div class="accordion-item">
                 <h2 class="accordion-header" id="headingThree">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                        Método de Pago
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        <span th:text="#{payment.method}">Método de Pago</span>
                     </button>
                 </h2>
-                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                     data-bs-parent="#accordionExample">
                     <div class="accordion-body">
-                        <div class="input-group mb-3" th:classappend="${#fields.hasErrors('tarjeta.numTarjeta')} ? 'has-error'">
+                        <div class="input-group mb-3"
+                             th:classappend="${#fields.hasErrors('tarjeta.numTarjeta')} ? 'has-error'">
                             <span class="d-flex align-items-center justify-content-start">
-                                <label for="numTarjeta" class="form-label">Número de Tarjeta</label>
-                                <input type="text" class="form-control" id="numTarjeta" name="tarjeta.numTarjeta" th:field="*{tarjeta.numTarjeta}">
+                                <label for="numTarjeta" class="form-label" th:text="#{payment.cardNumber}">Número de Tarjeta</label>
+                                <input type="text" class="form-control" id="numTarjeta" name="tarjeta.numTarjeta"
+                                       th:field="*{tarjeta.numTarjeta}">
                             </span>
-                            <span th:if="${#fields.hasErrors('tarjeta.numTarjeta')}" th:errors="*{tarjeta.numTarjeta}" class="help-block" id="numTarjeta-error">Errores</span>
+                            <span th:if="${#fields.hasErrors('tarjeta.numTarjeta')}" th:errors="*{tarjeta.numTarjeta}"
+                                  class="help-block" id="numTarjeta-error">Errores</span>
                         </div>
                         <div class="input-group mb-3" th:classappend="${#fields.hasErrors('tarjeta.cv')} ? 'has-error'">
                             <span class="d-flex align-items-center justify-content-start">
-                                <label for="cv" class="form-label">CV</label>
-                                <input type="text" class="form-control" id="cv" name="tarjeta.cv" th:field="*{tarjeta.cv}">
+                                <label for="cv" class="form-label" th:text="#{payment.cv}">CV</label>
+                                <input type="text" class="form-control" id="cv" name="tarjeta.cv"
+                                       th:field="*{tarjeta.cv}">
                             </span>
-                            <span th:if="${#fields.hasErrors('tarjeta.cv')}" th:errors="*{tarjeta.cv}" class="help-block" id="cv-error">Errores</span>
+                            <span th:if="${#fields.hasErrors('tarjeta.cv')}" th:errors="*{tarjeta.cv}"
+                                  class="help-block" id="cv-error">Errores</span>
                         </div>
                         <div class="mb-3">
                             <div class="input-group mb-3"
-                                 th:classappend="${#fields.hasErrors('tarjeta.mesCaducidad') or #fields.hasErrors('tarjeta.yearCaducidad')} ? 'has-error'">
-                                <label for="mesCaducidad" class="form-label">Fecha caducidad (MM/yy)</label>
+                                 th:classappend="${#fields.hasErrors('tarjeta.mesCaducidad') or
+                                 #fields.hasErrors('tarjeta.yearCaducidad')} ? 'has-error'">
+                                <label for="mesCaducidad" class="form-label" th:text="#{payment.expiryDate}">Fecha caducidad (MM/yy)</label>
                                 <label for="yearCaducidad" class="form-label"></label>
                                 <span class="d-flex flex-row">
-                                <input type="number" class="form-control" id="mesCaducidad" name="tarjeta.mesCaducidad" th:field="*{tarjeta.mesCaducidad}">
-                                <input type="text" class="form-control" id="yearCaducidad" name="tarjeta.yearCaducidad" th:field="*{tarjeta.yearCaducidad}">
+                                <input type="number" class="form-control" id="mesCaducidad" name="tarjeta.mesCaducidad"
+                                       th:field="*{tarjeta.mesCaducidad}">
+                                <input type="text" class="form-control" id="yearCaducidad" name="tarjeta.yearCaducidad"
+                                       th:field="*{tarjeta.yearCaducidad}">
                                 </span>
-                                <span th:if="${#fields.hasErrors('tarjeta.mesCaducidad')}" th:errors="*{tarjeta.mesCaducidad}" class="help-block me-2" id="mesCaducidad-error">Errores</span>
-                                <span th:if="${#fields.hasErrors('tarjeta.yearCaducidad')}" th:errors="*{tarjeta.yearCaducidad}" class="help-block" id="yearCaducidad-error">Errores</span>
+                                <span th:if="${#fields.hasErrors('tarjeta.mesCaducidad')}"
+                                      th:errors="*{tarjeta.mesCaducidad}" class="help-block me-2"
+                                      id="mesCaducidad-error">Errores</span>
+                                <span th:if="${#fields.hasErrors('tarjeta.yearCaducidad')}"
+                                      th:errors="*{tarjeta.yearCaducidad}" class="help-block"
+                                      id="yearCaducidad-error">Errores</span>
                             </div>
                         </div>
                     </div>
@@ -153,7 +181,7 @@
         </div>
         <!-- Botón de hacer pedido -->
         <div class="my-3 text-end">
-            <button type="submit" class="btn btn-success">Hacer Pedido</button>
+            <button type="submit" class="btn btn-success" th:text="#{order.placeOrder}">Hacer Pedido</button>
         </div>
     </form>
 </main>
