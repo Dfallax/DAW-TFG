@@ -5,19 +5,22 @@ import com.luislr.zerif.dto.UsuarioSignupDto;
 import com.luislr.zerif.entidades.Usuario;
 import com.luislr.zerif.repositorios.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@RequiredArgsConstructor
 @Service
+@Slf4j
+@RequiredArgsConstructor
 public class UsuarioService {
 
 	private final UsuarioRepository usuarioRepository;
 
 	private final PasswordEncoder passwordEncoder;
 	private final UsuarioMapper mapper;
+
 
 	public Usuario save(Usuario u) {
 		u.setPassword(passwordEncoder.encode(u.getPassword()));

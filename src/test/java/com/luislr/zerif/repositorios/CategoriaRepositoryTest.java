@@ -51,8 +51,8 @@ public class CategoriaRepositoryTest {
     @Test
     @DataSet(value = "datasets/categorias.yml", cleanBefore = true, cleanAfter = true)
     public void shouldDeleteCategoria(){
-        categoriaRepository.deleteById(1L);
-        Categoria deleteedCategoria = categoriaRepository.findById(ID_CATEGORIA).orElseThrow(() -> new EntityNotFoundException("Categoria no encontrada con el ID 1L"));
+        categoriaRepository.deleteById(ID_CATEGORIA);
+        Categoria deleteedCategoria = categoriaRepository.findById(ID_CATEGORIA).orElse(null);
 
         assertNull(deleteedCategoria);
     }
