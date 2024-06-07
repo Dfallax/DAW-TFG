@@ -38,6 +38,9 @@ public class Pedido implements Serializable {
     @OneToOne(mappedBy = "pedido", cascade = CascadeType.ALL)
     private Tarjeta tarjeta;
 
+    @OneToOne(mappedBy = "pedido", cascade = CascadeType.ALL)
+    private Receptor receptor;
+
     @OneToMany(mappedBy = "pedido", cascade = CascadeType.PERSIST)
     private List<ArticuloPedido> articulos;
 

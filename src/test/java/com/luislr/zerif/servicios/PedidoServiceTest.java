@@ -37,6 +37,7 @@ public class PedidoServiceTest {
     @Mock
     private UsuarioMapper usuarioMapper;
 
+    @Mock
     private UsuarioService usuarioService;
 
     @InjectMocks
@@ -45,10 +46,6 @@ public class PedidoServiceTest {
     @BeforeEach
     public void setUp() {
         MockitoAnnotations.openMocks(this);
-        // Crear instancia manualmente de UsuarioService con sus dependencias
-        usuarioService = new UsuarioService(usuarioRepository, passwordEncoder, usuarioMapper);
-        // Inyectar manualmente UsuarioService en PedidoService
-        pedidoService = new PedidoService(pedidoRepository, usuarioService, articuloPedidoRepository);
     }
 
     @Test
@@ -76,9 +73,9 @@ public class PedidoServiceTest {
     public void testObtenerCarrito() {
         String username = "user";
         Usuario usuario = new Usuario();
-
         Pedido carrito = new Pedido();
-        when(Optional.of( usuarioService.findByUsername(username))).thenReturn(Optional.of(usuario));
+
+        when(usuarioService.findByUsername(username)).thenReturn(usuario);
         when(pedidoRepository.findByUsuarioAndEstado(usuario, Pedido.EstadoPedido.CARRITO)).thenReturn(Optional.of(carrito));
 
         Pedido foundCarrito = pedidoService.obtenerCarrito(username);
@@ -92,6 +89,7 @@ public class PedidoServiceTest {
     public void testObtenerCarritoNotFound() {
         String username = "user";
         Usuario usuario = new Usuario();
+
         when(usuarioService.findByUsername(username)).thenReturn(usuario);
         when(pedidoRepository.findByUsuarioAndEstado(usuario, Pedido.EstadoPedido.CARRITO)).thenReturn(Optional.empty());
 
@@ -104,6 +102,7 @@ public class PedidoServiceTest {
     public void testFindCarritoByUsuario() {
         Usuario usuario = new Usuario();
         Pedido carrito = new Pedido();
+
         when(pedidoRepository.findByUsuarioAndEstado(usuario, Pedido.EstadoPedido.CARRITO)).thenReturn(Optional.of(carrito));
 
         Pedido foundCarrito = pedidoService.findCarritoByUsuario(usuario);
@@ -115,6 +114,7 @@ public class PedidoServiceTest {
     @Test
     public void testFindCarritoByUsuarioNotFound() {
         Usuario usuario = new Usuario();
+
         when(pedidoRepository.findByUsuarioAndEstado(usuario, Pedido.EstadoPedido.CARRITO)).thenReturn(Optional.empty());
 
         Pedido foundCarrito = pedidoService.findCarritoByUsuario(usuario);

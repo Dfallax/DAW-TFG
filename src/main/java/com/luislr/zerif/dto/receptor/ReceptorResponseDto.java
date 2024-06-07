@@ -1,19 +1,22 @@
-package com.luislr.zerif.dto.tarjeta;
+package com.luislr.zerif.dto.receptor;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import lombok.*;
+
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-public class TarjetaResponseDto {
-    private Long id;
-    private String numTarjeta;
-    private String cv;
-    private String fechCaducidad;
-    private Long idPedido;
+public class ReceptorResponseDto {
 
+    private Long id;
+    private String nombre;
+    private String apellidos;
+    private String telefono;
+    private Long idPedido;
 }
+

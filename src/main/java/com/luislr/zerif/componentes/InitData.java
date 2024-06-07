@@ -37,6 +37,7 @@ public class InitData {
     private final ArticuloPedidoService articuloPedidoService;
     private final DireccionService direccionService;
     private final TarjetaService tarjetaService;
+    private final ReceptorService receptorService;
 
     @PersistenceContext
     private EntityManager em;
@@ -72,6 +73,9 @@ public class InitData {
                     .email("user" + i + "@gmail.com")
                     .password("user" + i)
                     .perfil(perfilUser)
+                    .nombre("nombre"+i)
+                    .apellidos("apellidos"+i)
+                    .telefono("612346124")
                     .build();
             usuarioService.save(usuario);
         }
@@ -319,8 +323,17 @@ public class InitData {
                                 .build();
                         tarjetaService.save(tarjeta);
 
+                        Receptor receptor = Receptor.builder()
+                                .nombre(usuario.getNombre())
+                                .apellidos(usuario.getApellidos())
+                                .telefono(usuario.getTelefono())
+                                .pedido(pedido)
+                                .build();
+                        receptorService.save(receptor);
+
                         pedido.setDireccion(direccion);
                         pedido.setTarjeta(tarjeta);
+                        pedido.setReceptor(receptor);
                         pedidoService.save(pedido);
                     }
                     // Agregar artículos al pedido después de guardar el pedido para obtener su ID

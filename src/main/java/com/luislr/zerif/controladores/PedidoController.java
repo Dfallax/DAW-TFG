@@ -3,6 +3,8 @@ package com.luislr.zerif.controladores;
 import com.luislr.zerif.dto.PedidoCompraDto;
 import com.luislr.zerif.dto.direccion.DireccionCreateDto;
 import com.luislr.zerif.dto.direccion.DireccionMapper;
+import com.luislr.zerif.dto.receptor.ReceptorCreateDto;
+import com.luislr.zerif.dto.receptor.ReceptorMapper;
 import com.luislr.zerif.dto.tarjeta.TarjetaCreateDto;
 import com.luislr.zerif.dto.tarjeta.TarjetaMapper;
 import com.luislr.zerif.entidades.*;
@@ -36,8 +38,10 @@ public class PedidoController {
     private final UsuarioService usuarioService;
     private final DireccionService direccionService;
     private final TarjetaService tarjetaService;
+    private final ReceptorService receptorService;
     private final DireccionMapper direccionMapper;
     private final TarjetaMapper tarjetaMapper;
+    private final ReceptorMapper receptorMapper;
 
     @GetMapping("/carrito")
     public String verCarrito(Model model) {
@@ -118,6 +122,8 @@ public class PedidoController {
         PedidoCompraDto pedidoCompraDto = new PedidoCompraDto();
         pedidoCompraDto.setTarjeta(new TarjetaCreateDto());
         pedidoCompraDto.setDireccion(new DireccionCreateDto());
+        pedidoCompraDto.setReceptor(new ReceptorCreateDto());
+
         model.addAttribute("pedidoCompraDto",pedidoCompraDto);
         model.addAttribute("pedido",pedido);
         return "pedido/proceso-compra";
@@ -137,6 +143,8 @@ public class PedidoController {
         PedidoCompraDto pedidoCompraDto = new PedidoCompraDto();
         pedidoCompraDto.setTarjeta(new TarjetaCreateDto());
         pedidoCompraDto.setDireccion(new DireccionCreateDto());
+        pedidoCompraDto.setReceptor(new ReceptorCreateDto());
+
         pedidoCompraDto.setIdProducto(producto.getId());
         pedidoCompraDto.setCantidad(cantidad);
 
@@ -157,7 +165,14 @@ public class PedidoController {
             log.info("Hay un error");
             bindingResult.getFieldErrors()
                     .forEach(e -> log.info("field: " + e.getField() + ", rejected value: " + e.getRejectedValue()));
-
+            if (pedidoCompraDto.getIdProducto() != null){
+                pedido = PedidoUtilidades.crearPedidoConProducto(
+                        usuarioService.findByUsername(username)
+                        , productoService.findById(pedidoCompraDto.getIdProducto())
+                        , pedidoCompraDto.getCantidad()
+                );
+            }
+            model.addAttribute("pedido", pedido);
             model.addAttribute("pedidoCompraDto", pedidoCompraDto);
             return "pedido/proceso-compra";
         }
@@ -187,9 +202,11 @@ public class PedidoController {
 
         Direccion direccion = direccionMapper.toEntity(pedidoCompraDto.getDireccion());
         Tarjeta tarjeta = tarjetaMapper.toEntity(pedidoCompraDto.getTarjeta());
+        Receptor receptor = receptorMapper.toEntity(pedidoCompraDto.getReceptor());
 
         direccion.setPedido(pedido);
         tarjeta.setPedido(pedido);
+        receptor.setPedido(pedido);
 
         // Proceso de verificación de sí el pedido ya tiene una dirección o tarjeta asignada
         if (direccion.getId() != null && direccionService.existsById(direccion.getId())) {
@@ -204,8 +221,15 @@ public class PedidoController {
             tarjetaService.save(tarjeta);
         }
 
+        if (receptor.getId() != null && receptorService.existsById(receptor.getId())){
+            receptor = receptorService.update(receptor);
+        }else{
+            receptorService.save(receptor);
+        }
+
         pedido.setDireccion(direccion);
         pedido.setTarjeta(tarjeta);
+        pedido.setReceptor(receptor);
         pedido.setEstado(Pedido.EstadoPedido.PENDIENTE);
         pedido.setFechaPedido(LocalDate.now());
 

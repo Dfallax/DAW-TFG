@@ -16,4 +16,6 @@ public class DireccionResponseDto {
     private Integer piso;
     private String puerta;
     private String ciudad;
+    private Long idPedido;
+
 }

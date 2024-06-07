@@ -34,4 +34,7 @@ public class DireccionUpdateDto {
 
     @NotBlank(message = "{direccion.error.ciudad.obligatoria}")
     private String ciudad;
+
+    @NotNull(message = "El ID del pedido es obligatorio")
+    private Long idPedido;
 }

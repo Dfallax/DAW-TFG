@@ -13,18 +13,18 @@ import lombok.NoArgsConstructor;
 public class TarjetaCreateDto {
     @NotBlank(message = "{tarjeta.error.numero.obligatorio}")
     @Size(min = 16, max = 16, message = "{tarjeta.error.numero.size}")
-    private String numTarjeta;
+    private String numTarjeta="1234567891234567";
 
     @NotBlank(message = "{tarjeta.error.cv.obligatorio}")
     @Size(min = 3, max = 4, message = "{tarjeta.error.cv.size}")
-    private String cv;
+    private String cv="035";
 
     @NotNull(message = "{tarjeta.error.mesCaducidad.obligatorio}")
     @Min(value = 1, message = "{tarjeta.error.mesCaducidad.min}")
     @Max(value = 12, message = "{tarjeta.error.mesCaducidad.max}")
-    private Integer mesCaducidad;
+    private Integer mesCaducidad=10;
 
     @NotNull(message = "{tarjeta.error.yearCaducidad.obligatorio}")
     @Pattern(regexp = "\\d{2}", message = "{tarjeta.error.yearCaducidad.pattern}")
-    private String yearCaducidad;
+    private String yearCaducidad="25";
 }

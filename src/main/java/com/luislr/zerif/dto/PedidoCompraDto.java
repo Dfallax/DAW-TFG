@@ -1,6 +1,7 @@
 package com.luislr.zerif.dto;
 
 import com.luislr.zerif.dto.direccion.DireccionCreateDto;
+import com.luislr.zerif.dto.receptor.ReceptorCreateDto;
 import com.luislr.zerif.dto.tarjeta.TarjetaCreateDto;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -23,4 +24,7 @@ public class PedidoCompraDto {
 
     @Valid
     private DireccionCreateDto direccion;
+
+    @Valid
+    private ReceptorCreateDto receptor;
 }

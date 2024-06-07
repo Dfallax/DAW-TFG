@@ -30,4 +30,7 @@ public class TarjetaUpdateDto {
     @NotNull(message = "El año de caducidad es obligatorio")
     @Pattern(regexp = "\\d{2}", message = "El año debe ser los dos últimos dígitos")
     private String yearCaducidad;
+
+    @NotNull(message = "El ID del pedido es obligatorio")
+    private Long idPedido;
 }
