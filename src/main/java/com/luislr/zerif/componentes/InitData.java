@@ -16,6 +16,8 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -49,8 +51,9 @@ public class InitData {
         initSeccionBlog();
         initPreferencias();
         initProducto();
-        initPedidos(); // Añadimos la llamada al método initPedidos
+        initPedidos();
     }
+
 
     public void initStorage() {
         storageService.init();
