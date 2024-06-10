@@ -1,4 +1,4 @@
-package com.luislr.zerif.dto;
+package com.luislr.zerif.dto.usuario;
 
 import com.luislr.zerif.entidades.Perfil;
 import jakarta.validation.constraints.NotNull;

@@ -1,6 +1,6 @@
 package com.luislr.zerif.controladores;
-import com.luislr.zerif.dto.PerfilSignupDto;
-import com.luislr.zerif.dto.UsuarioSignupDto;
+import com.luislr.zerif.dto.usuario.UsuarioMapper;
+import com.luislr.zerif.dto.usuario.UsuarioSignupDto;
 import com.luislr.zerif.entidades.Usuario;
 import com.luislr.zerif.servicios.PerfilService;
 import com.luislr.zerif.servicios.UsuarioService;
@@ -17,8 +17,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.List;
-
 @Slf4j
 @RequiredArgsConstructor
 @Controller
@@ -26,7 +24,7 @@ import java.util.List;
 public class UsuarioController {
 
   private final UsuarioService usuarioService;
-  private final PerfilService perfilService;
+  private final UsuarioMapper usuarioMapper;
 
 
   @GetMapping("/login")
@@ -50,14 +48,13 @@ public class UsuarioController {
                         Model model
   ){
     Usuario usuario = usuarioService.findByUsername(userDetails.getUsername());
-    model.addAttribute("usuario", usuario);
+    model.addAttribute("usuario", usuarioMapper.toDtoUpdate(usuario));
     return "usuario/mi-perfil";
   }
 
   @PostMapping("/signup")
   public String signupSubmit(@Valid @ModelAttribute("usuarioSignupDto") UsuarioSignupDto dto,
-                                   BindingResult bindingResult,
-                                   Model model) {
+                                   BindingResult bindingResult) {
     if (bindingResult.hasErrors()) {
       log.info("hay errores en el formulario");
       bindingResult.getFieldErrors()

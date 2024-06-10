@@ -1,6 +1,6 @@
 package com.luislr.zerif.controladores;
 
-import com.luislr.zerif.dto.PedidoCompraDto;
+import com.luislr.zerif.dto.pedido.PedidoCompraDto;
 import com.luislr.zerif.dto.direccion.DireccionCreateDto;
 import com.luislr.zerif.dto.direccion.DireccionMapper;
 import com.luislr.zerif.dto.receptor.ReceptorCreateDto;

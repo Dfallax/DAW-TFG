@@ -1,23 +1,30 @@
 package com.luislr.zerif.dto.usuario;
 
-import com.luislr.zerif.entidades.Perfil;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.util.Set;
-
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Builder
 public class UsuarioUpdateDto {
-    @NotNull
+
+    @NotNull(message = "El nombre de usuario no puede ser nulo")
     String username;
-    @NotNull
+
+    @NotNull(message = "El nombre no puede ser nulo")
     String nombre;
-    @NotNull
+
+    @NotNull(message = "Los apellidos no pueden ser nulos")
     String apellidos;
-    @NotNull
+
+    @NotNull(message = "El correo electrónico no puede ser nulo")
     String email;
-    @NotNull
+
+    @NotNull(message = "El número de teléfono no puede ser nulo")
     String telefono;
-    @NotNull
-    String password;
+
 }

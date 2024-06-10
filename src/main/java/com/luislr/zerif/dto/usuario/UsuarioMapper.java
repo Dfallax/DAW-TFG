@@ -1,5 +1,6 @@
-package com.luislr.zerif.dto;
+package com.luislr.zerif.dto.usuario;
 
+import com.luislr.zerif.dto.perfil.PerfilSignupDto;
 import com.luislr.zerif.entidades.Perfil;
 import com.luislr.zerif.entidades.Usuario;
 import org.mapstruct.CollectionMappingStrategy;
@@ -14,6 +15,8 @@ import java.util.List;
 )
 public interface UsuarioMapper {
     UsuarioSignupDto toDto(Usuario entity);
+
+    UsuarioUpdateDto toDtoUpdate(Usuario entity);
 
     Usuario toEntity(UsuarioSignupDto dto);
 

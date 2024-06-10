@@ -6,7 +6,7 @@ import com.luislr.zerif.entidades.Usuario;
 import com.luislr.zerif.repositorios.ArticuloPedidoRepository;
 import com.luislr.zerif.repositorios.PedidoRepository;
 import com.luislr.zerif.repositorios.UsuarioRepository;
-import com.luislr.zerif.dto.UsuarioMapper;
+import com.luislr.zerif.dto.usuario.UsuarioMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -26,16 +26,7 @@ public class PedidoServiceTest {
     private PedidoRepository pedidoRepository;
 
     @Mock
-    private UsuarioRepository usuarioRepository;
-
-    @Mock
     private ArticuloPedidoRepository articuloPedidoRepository;
-
-    @Mock
-    private PasswordEncoder passwordEncoder;
-
-    @Mock
-    private UsuarioMapper usuarioMapper;
 
     @Mock
     private UsuarioService usuarioService;

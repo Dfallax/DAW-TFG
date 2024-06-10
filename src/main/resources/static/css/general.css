@@ -11,18 +11,22 @@ footer{
 iframe{
     width: auto
 }
+
 .link-buscadorNav{
     text-decoration: none;
     color: black;
 }
+
 .span-producto{
     width: 31%;
     float: left;
     margin: 1%;
 }
+
 .imagen-producto{
     width: 100%;
 }
+
 .valoracionMedia{
     display: flex;
     align-items: center;
@@ -30,7 +34,6 @@ iframe{
     bottom: 0;
     left: 0;
     background-color: rgba(0, 0, 0, 0.5); /* Color de fondo del overlay */
-    color: white; /* Color del texto del overlay */
     padding: 10px;
 }
 .dropdown-menu {
@@ -83,10 +86,6 @@ iframe{
         width: 48%;
     }
 
-    .dropdown-menu {
-        min-width: max-content;
-        padding: 4px 0;
-    }
 
 }
 

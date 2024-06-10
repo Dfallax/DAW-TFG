@@ -1,5 +1,6 @@
-package com.luislr.zerif.dto;
+package com.luislr.zerif.dto.pedido;
 
+import com.luislr.zerif.dto.articuloPedido.ArticuloPedidoDto;
 import com.luislr.zerif.dto.direccion.DireccionCreateDto;
 import com.luislr.zerif.dto.tarjeta.TarjetaCreateDto;
 import com.luislr.zerif.entidades.Pedido.EstadoPedido;

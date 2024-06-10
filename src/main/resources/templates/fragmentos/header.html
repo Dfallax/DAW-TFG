@@ -98,8 +98,8 @@
                         </ul>
                     </li>
                     <!--Iniciar sesión-->
-                    <li sec:authorize="!isAuthenticated()" class="nav-item m-1">
-                        <a class="nav-link d-flex align-items-center justify-content-start" href="#" th:href="@{/usuario/login}" >
+                    <li sec:authorize="!isAuthenticated()" class="nav-item m-1 ">
+                        <a class="nav-link" href="#" th:href="@{/usuario/login}" >
                             <span class="me-2">
                                 <i class="fa-solid fa-circle-user fa-beat fa-xl" style="color: #000000;"></i>
                             </span>
@@ -115,17 +115,21 @@
                             <span th:text="${#authentication.name}">Username</span>
                             <span class="caret"></span>
                         </a>
-                        <ul class="dropdown-menu" style="width: min-content">
+                        <ul class="dropdown-menu">
                             <li>
-                                <a a class="dropdown-item" th:href="@{/usuario/miperfil}">
-                                    <p class="ms-2" th:text="#{header.mi_perfil}">Mi perfil</p>
+                                <a class="dropdown-item" th:href="@{/usuario/miperfil}">
+                                    <p th:text="#{header.mi_perfil}">Mi perfil</p>
+                                </a>
+                            </li>
+                            <li><a class="dropdown-item">
+                                    <p th:text="#{header.pedidos}">Pedidos</p>
                                 </a>
                             </li>
                             <li>
-                                <p class="ms-2" th:text="#{header.pedidos}">Pedidos</p>
-                            </li>
-                            <li><a class="dropdown-item" href="javascript:document.getElementById('logoutForm').submit()">
-                                <i class="fas fa-sign-out-alt"></i> <span th:text="#{header.salir}">Salir</span></a>
+                                <a class="dropdown-item" href="javascript:document.getElementById('logoutForm').submit()">
+                                    <i class="fas fa-sign-out-alt "></i>
+                                    <span th:text="#{header.salir}">Salir</span>
+                                </a>
                             </li>
                         </ul>
                     </li>

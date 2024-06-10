@@ -1,0 +1,35 @@
+<form id="form-usuario" method="post" th:action="@{/usuario/update}" th:object="${usuario}" th:fragment="form-usuario">
+    <div class="input-group  mb-3" th:classappend="${#fields.hasErrors('username')} ? 'has-error'">
+            <span>
+                <label for="username" class="form-label" th:text="#{form.label.username}">Nombre de usuario</label>
+                <input type="text" class="form-control" id="username" name="username" th:field="*{username}" readonly>
+            </span>
+        <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"
+              class="help-block ms-3" id="username-error">Errores</span>
+    </div>
+    <div class="input-group  mb-3" th:classappend="${#fields.hasErrors('nombre')} ? 'has-error'">
+            <span>
+                <label for="nombre" class="form-label" th:text="#{form.label.nombre}">Nombre</label>
+                <input type="text" class="form-control" id="nombre" name="nombre" th:field="*{nombre}" readonly>
+            </span>
+        <span th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"
+              class="help-block ms-3" id="nombre-error">Errores</span>
+    </div>
+    <div class="input-group mb-3" th:classappend="${#fields.hasErrors('apellidos')} ? 'has-error'">
+            <span>
+                <label for="apellidos" class="form-label" th:text="#{form.label.apellidos}">Apellidos</label>
+                <input type="text" class="form-control" id="apellidos" name="apellidos"
+                       th:field="*{apellidos}" readonly>
+            </span>
+        <span th:if="${#fields.hasErrors('apellidos')}" th:errors="*{apellidos}"
+              class="help-block ms-3" id="apellidos-error">Errores</span>
+    </div>
+    <div class="input-group mb-3" th:classappend="${#fields.hasErrors('telefono')} ? 'has-error'">
+            <span>
+                <label for="telefono" class="form-label" th:text="#{form.label.telefono}">Telefono</label>
+                <input type="text" class="form-control" id="telefono" name="telefono" th:field="*{telefono}" readonly>
+            </span>
+        <span th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"
+              class="help-block ms-3" id="telefono-error">Errores</span>
+    </div>
+</form>

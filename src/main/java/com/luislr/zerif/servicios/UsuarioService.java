@@ -1,7 +1,7 @@
 package com.luislr.zerif.servicios;
 
-import com.luislr.zerif.dto.UsuarioMapper;
-import com.luislr.zerif.dto.UsuarioSignupDto;
+import com.luislr.zerif.dto.usuario.UsuarioMapper;
+import com.luislr.zerif.dto.usuario.UsuarioSignupDto;
 import com.luislr.zerif.entidades.Usuario;
 import com.luislr.zerif.repositorios.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
@@ -34,14 +34,14 @@ public class UsuarioService {
 	}
 
 	public List<Usuario> saveAll (List<Usuario> lista) {
-		lista.stream()
-				.forEach(usuario ->
+		lista.forEach(usuario ->
 						usuario.setPassword(passwordEncoder.encode(usuario.getPassword())));
 		return usuarioRepository.saveAll(lista); }
 
 	public Usuario findById(long id) {
 		return usuarioRepository.findById(id).orElse(null);
 	}
+
 	public Usuario findByUsername(String username) {
 		return usuarioRepository.findByUsername(username).orElse(null);
 	}

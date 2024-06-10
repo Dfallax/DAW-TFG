@@ -1,4 +1,4 @@
-package com.luislr.zerif.dto;
+package com.luislr.zerif.dto.articuloPedido;
 
 
 import jakarta.validation.constraints.Min;

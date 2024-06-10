@@ -1,4 +1,4 @@
-package com.luislr.zerif.dto;
+package com.luislr.zerif.dto.pedido;
 
 import com.luislr.zerif.dto.direccion.DireccionCreateDto;
 import com.luislr.zerif.dto.receptor.ReceptorCreateDto;

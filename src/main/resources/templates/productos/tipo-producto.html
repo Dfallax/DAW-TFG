@@ -29,7 +29,8 @@
         <!--Subtipos-->
         <div th:unless="${listaSubtipos.size()==0}" class="mb-5">
             <div>
-                <button class="buttonSubtipo" th:each="subtipo : ${listaSubtipos}" th:text="${subtipo.nombre}">Todos los Ramos</button>
+                <button class="buttonSubtipo" th:each="subtipo : ${listaSubtipos}" th:text="${subtipo.nombre}">
+                    Todos los Ramos</button>
             </div>
         </div>
         <!--Opciones-->
