@@ -79,7 +79,7 @@
                                        th:field="*{receptor.nombre}">
                             </span>
                             <span th:if="${#fields.hasErrors('receptor.nombre')}" th:errors="*{receptor.nombre}"
-                                  class="help-block" id="nombre-error">Errores</span>
+                                  class="help-block ms-3" id="nombre-error">Errores</span>
                         </div>
                         <div class="input-group mb-3"
                              th:classappend="${#fields.hasErrors('receptor.apellidos')} ? 'has-error'">
@@ -89,7 +89,7 @@
                                        th:field="*{receptor.apellidos}">
                             </span>
                             <span th:if="${#fields.hasErrors('receptor.apellidos')}" th:errors="*{receptor.apellidos}"
-                                  class="help-block" id="apellidos-error">Errores</span>
+                                  class="help-block ms-3" id="apellidos-error">Errores</span>
                         </div>
                         <div class="input-group mb-3"
                              th:classappend="${#fields.hasErrors('receptor.telefono')} ? 'has-error'">
@@ -99,7 +99,7 @@
                                        th:field="*{receptor.telefono}">
                             </span>
                             <span th:if="${#fields.hasErrors('receptor.telefono')}" th:errors="*{receptor.telefono}"
-                                  class="help-block" id="telefono-error">Errores</span>
+                                  class="help-block ms-3" id="telefono-error">Errores</span>
                         </div>
                     </div>
                 </div>
@@ -124,7 +124,7 @@
                                        th:field="*{direccion.calle}">
                             </span>
                             <span th:if="${#fields.hasErrors('direccion.calle')}" th:errors="*{direccion.calle}"
-                                  class="help-block" id="calle-error">Errores</span>
+                                  class="help-block ms-3" id="calle-error">Errores</span>
                         </div>
                         <div class="input-group mb-3"
                              th:classappend="${#fields.hasErrors('direccion.numero')} ? 'has-error'">
@@ -134,7 +134,7 @@
                                        th:field="*{direccion.numero}">
                             </span>
                             <span th:if="${#fields.hasErrors('direccion.numero')}" th:errors="*{direccion.numero}"
-                                  class="help-block" id="numero-error">Errores</span>
+                                  class="help-block ms-3" id="numero-error">Errores</span>
                         </div>
                         <div class="input-group mb-3"
                              th:classappend="${#fields.hasErrors('direccion.piso')} ? 'has-error'">
@@ -144,7 +144,7 @@
                                        th:field="*{direccion.piso}">
                             </span>
                             <span th:if="${#fields.hasErrors('direccion.piso')}" th:errors="*{direccion.piso}"
-                                  class="help-block" id="piso-error">Errores</span>
+                                  class="help-block ms-3" id="piso-error">Errores</span>
                         </div>
                         <div class="input-group mb-3"
                              th:classappend="${#fields.hasErrors('direccion.puerta')} ? 'has-error'">
@@ -154,7 +154,7 @@
                                        th:field="*{direccion.puerta}">
                             </span>
                             <span th:if="${#fields.hasErrors('direccion.puerta')}" th:errors="*{direccion.puerta}"
-                                  class="help-block" id="puerta-error">Errores</span>
+                                  class="help-block ms-3" id="puerta-error">Errores</span>
                         </div>
                         <div class="input-group mb-3"
                              th:classappend="${#fields.hasErrors('direccion.ciudad')} ? 'has-error'">
@@ -164,7 +164,7 @@
                                        th:field="*{direccion.ciudad}">
                             </span>
                             <span th:if="${#fields.hasErrors('direccion.ciudad')}" th:errors="*{direccion.ciudad}"
-                                  class="help-block" id="ciudad-error">Errores</span>
+                                  class="help-block ms-3" id="ciudad-error">Errores</span>
                         </div>
                     </div>
                 </div>
@@ -184,12 +184,13 @@
                         <div class="input-group mb-3"
                              th:classappend="${#fields.hasErrors('tarjeta.numTarjeta')} ? 'has-error'">
                             <span class="d-flex align-items-center justify-content-start">
-                                <label for="numTarjeta" class="form-label" th:text="#{tarjeta.numeroTarjeta}">Número de Tarjeta</label>
+                                <label for="numTarjeta" class="form-label" th:text="#{tarjeta.numeroTarjeta}">
+                                    Número de Tarjeta</label>
                                 <input type="text" class="form-control" id="numTarjeta" name="tarjeta.numTarjeta"
                                        th:field="*{tarjeta.numTarjeta}">
                             </span>
                             <span th:if="${#fields.hasErrors('tarjeta.numTarjeta')}" th:errors="*{tarjeta.numTarjeta}"
-                                  class="help-block" id="numTarjeta-error">Errores</span>
+                                  class="help-block ms-3" id="numTarjeta-error">Errores</span>
                         </div>
                         <div class="input-group mb-3" th:classappend="${#fields.hasErrors('tarjeta.cv')} ? 'has-error'">
                             <span class="d-flex align-items-center justify-content-start">
@@ -198,22 +199,23 @@
                                        th:field="*{tarjeta.cv}">
                             </span>
                             <span th:if="${#fields.hasErrors('tarjeta.cv')}" th:errors="*{tarjeta.cv}"
-                                  class="help-block" id="cv-error">Errores</span>
+                                  class="help-block ms-3" id="cv-error">Errores</span>
                         </div>
                         <div class="mb-3">
                             <div class="input-group mb-3"
                                  th:classappend="${#fields.hasErrors('tarjeta.mesCaducidad') or
                                  #fields.hasErrors('tarjeta.yearCaducidad')} ? 'has-error'">
-                                <label for="mesCaducidad" class="form-label" th:text="#{tarjeta.fechaExpiracion}">Fecha caducidad (MM/yy)</label>
+                                <label for="mesCaducidad" class="form-label" th:text="#{tarjeta.fechaExpiracion}">
+                                    Fecha caducidad (MM/yy)</label>
                                 <label for="yearCaducidad" class="form-label"></label>
-                                <span class="d-flex flex-row">
-                                <input type="number" class="form-control" id="mesCaducidad" name="tarjeta.mesCaducidad"
-                                       th:field="*{tarjeta.mesCaducidad}">
-                                <input type="text" class="form-control" id="yearCaducidad" name="tarjeta.yearCaducidad"
-                                       th:field="*{tarjeta.yearCaducidad}">
+                                <span class="d-flex flex-row w-25">
+                                    <input type="number" class="form-control" id="mesCaducidad"
+                                           name="tarjeta.mesCaducidad" th:field="*{tarjeta.mesCaducidad}">
+                                    <input type="text" class="form-control" id="yearCaducidad"
+                                           name="tarjeta.yearCaducidad" th:field="*{tarjeta.yearCaducidad}">
                                 </span>
                                 <span th:if="${#fields.hasErrors('tarjeta.mesCaducidad')}"
-                                      th:errors="*{tarjeta.mesCaducidad}" class="help-block me-2"
+                                      th:errors="*{tarjeta.mesCaducidad}" class="help-block ms-3 me-3"
                                       id="mesCaducidad-error">Errores</span>
                                 <span th:if="${#fields.hasErrors('tarjeta.yearCaducidad')}"
                                       th:errors="*{tarjeta.yearCaducidad}" class="help-block"

@@ -7,6 +7,8 @@ import com.luislr.zerif.servicios.UsuarioService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -41,6 +43,15 @@ public class UsuarioController {
   public String signup(Model model){
     model.addAttribute("usuarioSignupDto", UsuarioSignupDto.builder().build());
     return "usuario/signup";
+  }
+
+  @GetMapping("/miperfil")
+  public String mipefil(@AuthenticationPrincipal UserDetails userDetails,
+                        Model model
+  ){
+    Usuario usuario = usuarioService.findByUsername(userDetails.getUsername());
+    model.addAttribute("usuario", usuario);
+    return "usuario/mi-perfil";
   }
 
   @PostMapping("/signup")

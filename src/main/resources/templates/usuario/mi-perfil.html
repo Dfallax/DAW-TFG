@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form method="post" th:action="@{/usuario/update}" th:object="${usuario}">
+    <div class="input-group  mb-3" th:classappend="${#fields.hasErrors('usuario.username')} ? 'has-error'">
+            <span class="d-flex align-items-center justify-content-start">
+                <label for="username" class="form-label" th:text="*{username}">Nombre</label>
+                <input type="text" class="form-control" id="username" name="usuario.username" th:field="*{username}">
+            </span>
+        <span th:if="${#fields.hasErrors('usuario.username')}" th:errors="*{username}"
+              class="help-block ms-3" id="username-error">Errores</span>
+    </div>
+    <div class="input-group  mb-3" th:classappend="${#fields.hasErrors('usuario.nombre')} ? 'has-error'">
+            <span class="d-flex align-items-center justify-content-start">
+                <label for="nombre" class="form-label" th:text="*{nombre}">Nombre</label>
+                <input type="text" class="form-control" id="nombre" name="usuario.nombre" th:field="*{nombre}">
+            </span>
+        <span th:if="${#fields.hasErrors('usuario.nombre')}" th:errors="*{nombre}"
+              class="help-block ms-3" id="nombre-error">Errores</span>
+    </div>
+    <div class="input-group mb-3" th:classappend="${#fields.hasErrors('usuario.apellidos')} ? 'has-error'">
+            <span class="d-flex align-items-center justify-content-start">
+                <label for="apellidos" class="form-label" th:text="*{apellidos}">Puerta</label>
+                <input type="text" class="form-control" id="apellidos" name="usuario.apellidos"
+                       th:field="*{apellidos}">
+            </span>
+        <span th:if="${#fields.hasErrors('usuario.apellidos')}" th:errors="*{apellidos}"
+              class="help-block ms-3" id="apellidos-error">Errores</span>
+    </div>
+    <div class="input-group mb-3" th:classappend="${#fields.hasErrors('usuario.telefono')} ? 'has-error'">
+            <span class="d-flex align-items-center justify-content-start">
+                <label for="telefono" class="form-label" th:text="*{telefono}">Ciudad</label>
+                <input type="text" class="form-control" id="telefono" name="usuario.telefono" th:field="*{telefono}">
+            </span>
+        <span th:if="${#fields.hasErrors('usuario.telefono')}" th:errors="*{telefono}"
+              class="help-block ms-3" id="telefono-error">Errores</span>
+    </div>
+</form>
+</body>
+</html>
