@@ -16,7 +16,9 @@ public class Preferencias {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  private String idioma;
+  @ManyToOne
+  @JoinColumn(name = "id_idioma", referencedColumnName = "id_idioma", nullable = false)
+  private Idioma idioma;
 
   @OneToOne
   @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario", nullable = false)

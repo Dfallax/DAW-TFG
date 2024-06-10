@@ -32,4 +32,13 @@
         <span th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"
               class="help-block ms-3" id="telefono-error">Errores</span>
     </div>
+    <div class="form-select" th:classappend="${#fields.hasErrors('idioma')} ? 'has-error'">
+        <label class="form-label" for="tipo" >Núm chip</label>
+        <select id="tipo" th:field="*{tipo}">
+            <option value="" selected>seleccione tipo mascota</option>
+            <option th:each="tipo : ${listaTipos}"
+                    th:value="${tipo.id}" th:text="${tipo.nombre}"></option>
+        </select>
+        <span th:if="${#fields.hasErrors('tipo')}" th:errors="*{tipo}" class="help-block" id="tipo-error">Errores</span>
+    </div>
 </form>

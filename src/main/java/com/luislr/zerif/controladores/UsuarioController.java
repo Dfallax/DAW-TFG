@@ -1,8 +1,10 @@
 package com.luislr.zerif.controladores;
 import com.luislr.zerif.dto.usuario.UsuarioMapper;
 import com.luislr.zerif.dto.usuario.UsuarioSignupDto;
+import com.luislr.zerif.entidades.Preferencias;
 import com.luislr.zerif.entidades.Usuario;
 import com.luislr.zerif.servicios.PerfilService;
+import com.luislr.zerif.servicios.PreferenciasService;
 import com.luislr.zerif.servicios.UsuarioService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +19,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
+
 @Slf4j
 @RequiredArgsConstructor
 @Controller
@@ -25,8 +29,14 @@ public class UsuarioController {
 
   private final UsuarioService usuarioService;
   private final UsuarioMapper usuarioMapper;
+  private final PreferenciasService preferenciasService;
 
-
+  /*
+  @ModelAttribute("listaTipos")
+  public List<Preferencias> listaIdiomas() {
+    return tipoMascotaService.findAll();
+  }
+*/
   @GetMapping("/login")
   public String login(){
     return "usuario/login";

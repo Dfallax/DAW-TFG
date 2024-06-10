@@ -15,10 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.YearMonth;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -38,6 +35,7 @@ public class InitData {
     private final DireccionService direccionService;
     private final TarjetaService tarjetaService;
     private final ReceptorService receptorService;
+    private final IdiomaService idiomaService;
 
     @PersistenceContext
     private EntityManager em;
@@ -46,6 +44,7 @@ public class InitData {
     @EventListener
     public void onApplicationEvent(ApplicationReadyEvent event) {
         initStorage();
+        initIdiomas();
         initUsuarios();
         initSeccionBlog();
         initPreferencias();
@@ -56,6 +55,20 @@ public class InitData {
     public void initStorage() {
         storageService.init();
         storageService.loadAll();
+    }
+
+    public void initIdiomas() {
+        Idioma idiomaEs = Idioma.builder()
+                .lang("es_ES")
+                .idioma("Español")
+                .build();
+
+        Idioma idiomaEn = Idioma.builder()
+                .lang("en_US")
+                .idioma("Inglés")
+                .build();
+        idiomaService.saveAll(List.of(idiomaEs, idiomaEn));
+
     }
 
     public void initUsuarios() {
@@ -90,12 +103,14 @@ public class InitData {
         usuarioService.save(admin);
     }
 
+
+
     public void initPreferencias() {
         List<Usuario> usuarios = usuarioService.findAll();
-
+        Optional<Idioma> idioma = idiomaService.findById(1L);
         for (Usuario usuario : usuarios) {
             Preferencias prefs = Preferencias.builder()
-                    .idioma("es_ES") // Puedes asignar un idioma por defecto o personalizarlo
+                    .idioma(idioma.get()) // Puedes asignar un idioma por defecto o personalizarlo
                     .usuario(usuario)
                     .build();
             em.persist(prefs);
